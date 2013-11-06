@@ -16,15 +16,15 @@ namespace GP3_Coursework
             dc_SongCollection.Add(songName, songObject);
         }
 
-        public Song getSong(string songName)
+        public void getSong(string songName)
         {
-            Song returnSong = new Song();
 
+            Song tempSong;
             if(dc_SongCollection.ContainsKey(songName))
                 {
-                    returnSong = dc_SongCollection[songName];
+                    tempSong = dc_SongCollection[songName];
                 }
-            return returnSong;
+        
         }
 
         public void AddSoundEffect(string effectName,SoundEffect effectObject)

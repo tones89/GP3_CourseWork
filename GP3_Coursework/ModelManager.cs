@@ -29,15 +29,16 @@ namespace GP3_Coursework
         /// <param name="name"> The name to search the dictionary for, this will
         /// match the key value pair from before</param>
         /// <returns> the model from the collection matching the string</returns>
-        public Model GetModel(string name)
+        public void GetModel(string name)
         {
-            Model m_tempModel =  new Model();
+            Model m_tempModel;
            
             if (dc_ModelList.ContainsKey(name))
             {
                 m_tempModel = dc_ModelList["name"];
-                return m_tempModel;
+                
             }
+            
         }
     }
 }

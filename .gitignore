@@ -77,6 +77,13 @@ build/
 *.pidb
 *.log
 *.scc
+*.tga
+*.x
+*.fbx
+*.mp3
+*.wav
+*.ttf
+*.spritefont
 
 # Visual C++ cache files
 ipch/
