@@ -19,6 +19,7 @@ namespace GP3_Coursework
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        ModelManager mdl_Manager;
 
         #region User Defined Variables
         //------------------------------------------
@@ -119,6 +120,7 @@ namespace GP3_Coursework
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             this.IsMouseVisible = true;
+            mdl_Manager = new ModelManager();
         }
 
         /// <summary>
@@ -159,6 +161,14 @@ namespace GP3_Coursework
             // added to load Model
             //-------------------------------------------------------------
             mdlTardis = Content.Load<Model>(".\\Models\\tardis");
+            mdl_Manager.addModel("Tardis", mdlTardis);
+
+            mdl_Manager.GetModel("Tardis");
+
+            String testString = mdl_Manager.GetModel("Tardis").ToString();
+        
+            Console.WriteLine(testString);
+            
             aspectRatio = graphics.GraphicsDevice.Viewport.AspectRatio;
             //-------------------------------------------------------------
             // added to load SoundFX's

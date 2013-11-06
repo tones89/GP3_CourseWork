@@ -12,7 +12,6 @@ namespace GP3_Coursework
         string s_ModelName;
         Dictionary<string, Model> dc_ModelList;
 
-
         /// <summary>
         /// Add a model into the model library, this is an attempt to make it easier to access and manipulate the models/
         /// </summary>
@@ -20,7 +19,10 @@ namespace GP3_Coursework
         /// <param name="modelToAdd"> Takes the model (already loaded in game1.cs and adds to the collection.</param>
         public void addModel(string name,Model modelToAdd)
         {
-            dc_ModelList.Add(name, modelToAdd);
+            if(!dc_ModelList.ContainsKey(name))
+            {
+                dc_ModelList.Add(name, modelToAdd);
+            }
         }
 
         /// <summary>
@@ -29,16 +31,19 @@ namespace GP3_Coursework
         /// <param name="name"> The name to search the dictionary for, this will
         /// match the key value pair from before</param>
         /// <returns> the model from the collection matching the string</returns>
-        public void GetModel(string name)
+        public Model GetModel(string name)
         {
-            Model m_tempModel;
-           
-            if (dc_ModelList.ContainsKey(name))
+
+            if(!dc_ModelList.ContainsKey(name))
             {
-                m_tempModel = dc_ModelList["name"];
-                
+                return null;
             }
-            
+            else
+              return dc_ModelList[name];   
+        }
+         
+
+
+    
         }
     }
-}
