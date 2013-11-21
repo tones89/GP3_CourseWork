@@ -60,6 +60,9 @@
     <XnaCompressContent>true</XnaCompressContent>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BEPUphysics">
+      <HintPath>..\..\..\BEPU\x86\Release\BEPUphysics.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
       <Private>False</Private>
     </Reference>
@@ -108,6 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Audio.cs" />
+    <Compile Include="Camera.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="InputHandler.cs" />
     <Compile Include="ModelManager.cs" />

@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace GP3_Coursework
 {
     class Player
     {
         private int i_PlayerHealth;
-        private string s_Modelname;
         private int i_Ammo;
-
-       
-
+      
         /// <summary>
         /// The constructor for the creation of a new player
         /// </summary>
@@ -22,8 +23,10 @@ namespace GP3_Coursework
         {
             i_PlayerHealth = Health;
             i_Ammo = 4;
+          
         }
 
+       
         public int getHealth()
         {
             return i_PlayerHealth;
@@ -63,7 +66,9 @@ namespace GP3_Coursework
         }
 
         /// <summary>
-        /// Reduce the players ammo by three
+        /// Reduce the players ammo by 1
+        /// When ammo depletes a timer counts to 5 seconds, when the time reaches 5, the players
+        /// ammo is reloaded. 
         /// </summary>
         public void ReduceAmmo()
         {
@@ -129,12 +134,8 @@ namespace GP3_Coursework
         {
         }
 
-
-
-
-
-
-
-
+        
     }
+
+
 }

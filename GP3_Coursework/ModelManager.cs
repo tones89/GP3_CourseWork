@@ -9,7 +9,7 @@ namespace GP3_Coursework
 {
     class ModelManager
     {
-        string s_ModelName;
+        
         Dictionary<string, Model> dc_ModelList;
 
         /// <summary>
@@ -19,6 +19,8 @@ namespace GP3_Coursework
         /// <param name="modelToAdd"> Takes the model (already loaded in game1.cs and adds to the collection.</param>
         public void addModel(string name,Model modelToAdd)
         {
+            dc_ModelList = new Dictionary<string, Model>();
+
             if(!dc_ModelList.ContainsKey(name))
             {
                 dc_ModelList.Add(name, modelToAdd);

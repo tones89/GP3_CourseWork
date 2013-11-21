@@ -22,14 +22,20 @@ namespace GP3_Coursework
             i_Power = Power;
         }
 
+        public int getPower()
+        {
+            return i_Power;
+        }
+
         public int getHealth()
         {
             return i_Health;
         }
 
-        public void DeductHealth(int amount)
+        public int DeductHealth(int amount)
         {
             i_Health -= amount;
+            return i_Health;
         }
         public void move(int speed)
         { 
