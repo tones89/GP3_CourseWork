@@ -13,7 +13,13 @@ namespace GP3_Coursework
     {
         private int i_PlayerHealth;
         private int i_Ammo;
-      
+        public Matrix[] transforms;
+        public Matrix playerWorld;
+        public Model model;
+        public KeyboardState keyBoardState = Keyboard.GetState();
+        public KeyboardState previousKeyBoardState = Keyboard.GetState();
+        Camera camera = new Camera();
+
         /// <summary>
         /// The constructor for the creation of a new player
         /// </summary>
@@ -23,10 +29,9 @@ namespace GP3_Coursework
         {
             i_PlayerHealth = Health;
             i_Ammo = 4;
-          
+            playerWorld = Matrix.Identity;
         }
 
-       
         public int getHealth()
         {
             return i_PlayerHealth;
@@ -36,6 +41,7 @@ namespace GP3_Coursework
         {
             return i_Ammo; 
         }
+
         /// <summary>
         /// Called to add an amount to the players health
         /// </summary>
@@ -85,7 +91,55 @@ namespace GP3_Coursework
             }
         }
 
+        public void Update()
+        {
+            HandleInput();
+            camera.Update(playerWorld);
+          
+        }
 
+        private void  HandleInput()
+        {
+
+            if (keyBoardState.IsKeyDown(Keys.Enter) && previousKeyBoardState.IsKeyUp(Keys.Enter))
+            {
+                //camera.SwitchCameraMode();
+            }
+            if (keyBoardState.IsKeyDown(Keys.Space) && previousKeyBoardState.IsKeyUp(Keys.Space))
+            {
+                //FireCannon();
+            }
+
+            //Rotate Cube along its Up Vector
+            if (keyBoardState.IsKeyDown(Keys.X))
+            {
+                playerWorld = Matrix.CreateFromAxisAngle(Vector3.Up, .02f) * playerWorld;
+            }
+            if (keyBoardState.IsKeyDown(Keys.Z))
+            {
+                playerWorld = Matrix.CreateFromAxisAngle(Vector3.Up, -.02f) * playerWorld;
+            }
+
+            //Move Cube Forward, Back, Left, and Right
+            if (keyBoardState.IsKeyDown(Keys.Up))
+            {
+                playerWorld *= Matrix.CreateTranslation(playerWorld.Forward);
+
+            }
+            if (keyBoardState.IsKeyDown(Keys.Down))
+            {
+                playerWorld *= Matrix.CreateTranslation(playerWorld.Backward);
+            }
+            if (keyBoardState.IsKeyDown(Keys.Left))
+            {
+                playerWorld *= Matrix.CreateTranslation(-playerWorld.Right);
+            }
+            if (keyBoardState.IsKeyDown(Keys.Right))
+            {
+                playerWorld *= Matrix.CreateTranslation(playerWorld.Right);
+            }
+            previousKeyBoardState = keyBoardState;
+        }
         /// <summary>
         /// This method deals with any animations the player may have, 
         /// and makes a call to the animation class to play the given animation

@@ -20,7 +20,8 @@ namespace GP3_Coursework
         SpriteBatch spriteBatch;
         Camera camera = new Camera();
         Enemy enemy = new Enemy(5, 1, 2);
-      
+        //Player aPlayer = new Player(100);
+        KeyboardState keyBoardState = Keyboard.GetState();
         KeyboardState previousKeyBoardState = Keyboard.GetState();
 
         #region model vars
@@ -32,6 +33,9 @@ namespace GP3_Coursework
         Vector3 enemyPos;
         Model CannonBall;
         Matrix cannonWorld;
+        Vector3 playerPos;
+        Matrix enemyRot;
+        
         #endregion
 
         public Game1()
@@ -49,10 +53,10 @@ namespace GP3_Coursework
         /// </summary>
         protected override void Initialize()
         {
-            playerWorld = Matrix.Identity;
-            enemyWorld = Matrix.Identity;
-
             
+           playerWorld = Matrix.Identity;
+            enemyWorld = Matrix.Identity;
+            enemyRot = Matrix.Identity;
             
             base.Initialize();
             
@@ -64,8 +68,9 @@ namespace GP3_Coursework
         /// </summary>
         protected override void LoadContent()
         {
-       
-            // Create a new SpriteBatch, which can be used to draw textures.
+            
+            
+            // Create  new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             mdl_Player = Content.Load<Model>(".\\Models\\Pirate Ship");  
             skyBack = Content.Load<Texture2D>(".\\Models\\sky");   
@@ -75,7 +80,6 @@ namespace GP3_Coursework
 
         }
 
-       
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
         /// all content.
@@ -96,14 +100,37 @@ namespace GP3_Coursework
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
+
+            ArtificialIntellignce();
             ChasePlayer(playerWorld);
-            //camera.Update(playerWorld);
             camera.Update(playerWorld);
-            MovePlayer();
-           
-          
-            
+           // camera.Update(playerWorld);
+           MovePlayer();
+           playerPos = playerWorld.Translation;
+
             base.Update(gameTime);
+        }
+
+
+
+        void ArtificialIntellignce()
+        {
+
+            Vector3 speed = new Vector3(0.1f, 0f, 0f);
+            enemyRot.Forward.Normalize();
+            enemyRot.Up.Normalize();
+            enemyRot.Right.Normalize();
+            enemyWorld.Right.Normalize();
+            enemyWorld.Up.Normalize();
+            Vector3 desiredPosition;
+            float thing =(float) Math.Atan2(enemyPos.X - playerPos.X, enemyPos.Y - playerPos.Y);
+
+            //enemyPos = Vector3.Lerp(enemyWorld.Up, playerWorld.Up, thing);
+          //  enemyWorld = Matrix.CreateFromAxisAngle(enemyWorld.Up, thing);
+            desiredPosition = Vector3.Transform(speed, enemyWorld);
+            enemyPos = Vector3.SmoothStep(enemyPos, desiredPosition, .15f);
+            enemyWorld = Matrix.CreateTranslation(enemyPos) * Matrix.CreateFromAxisAngle(enemyWorld.Up, thing) *enemyWorld ;
+
         }
 
          void ChasePlayer(Matrix objectToChase)
@@ -114,6 +141,7 @@ namespace GP3_Coursework
             objectToChase.Right.Normalize();
             objectToChase.Up.Normalize();
 
+            
             desiredPosition = Vector3.Transform(offset, objectToChase);
 
             enemyPos = Vector3.SmoothStep(enemyPos, desiredPosition, .15f);
@@ -122,7 +150,7 @@ namespace GP3_Coursework
         }
 
         
-
+        
         //Method used to handle input of player and move them around the environment. 
         public void MovePlayer()
         {
@@ -158,17 +186,10 @@ namespace GP3_Coursework
             {
                 playerWorld *= Matrix.CreateTranslation(playerWorld.Backward);
             }
-            if (keyBoardState.IsKeyDown(Keys.Left))
-            {
-                playerWorld *= Matrix.CreateTranslation(-playerWorld.Right);
-            }
-            if (keyBoardState.IsKeyDown(Keys.Right))
-            {
-                playerWorld *= Matrix.CreateTranslation(playerWorld.Right);
-            }
             previousKeyBoardState = keyBoardState;
        }
-
+        
+        
         private void FireCannon()
         {
 
@@ -187,7 +208,7 @@ namespace GP3_Coursework
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             Draw2D();
-            DrawModel(mdl_Player, playerWorld);
+            DrawModel(mdl_Player,playerWorld);
             DrawModel(mdl_Enemy, enemyWorld);
             Matrix scaleMat =  Matrix.CreateScale(-100f);
            cannonWorld =  cannonWorld* scaleMat;
