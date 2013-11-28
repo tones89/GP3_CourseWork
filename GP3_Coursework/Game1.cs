@@ -16,22 +16,29 @@ namespace GP3_Coursework
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
-
-
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Camera camera = new Camera();
+        Enemy enemy = new Enemy(5, 1, 2);
+      
+        KeyboardState previousKeyBoardState = Keyboard.GetState();
+
+        #region model vars
         Matrix playerWorld;
         Model mdl_Player;
-        KeyboardState previousKeyBoardState = Keyboard.GetState();
         Texture2D skyBack; 
         Model mdl_Enemy;
         Matrix enemyWorld;
+        Vector3 enemyPos;
+        Model CannonBall;
+        Matrix cannonWorld;
+        #endregion
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+           
         }
 
         /// <summary>
@@ -44,7 +51,11 @@ namespace GP3_Coursework
         {
             playerWorld = Matrix.Identity;
             enemyWorld = Matrix.Identity;
+
+            
+            
             base.Initialize();
+            
         }
 
         /// <summary>
@@ -53,14 +64,18 @@ namespace GP3_Coursework
         /// </summary>
         protected override void LoadContent()
         {
+       
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            mdl_Player = Content.Load<Model>(".\\Models\\Pirate Ship");
-            skyBack = Content.Load<Texture2D>(".\\Models\\sky");
+            mdl_Player = Content.Load<Model>(".\\Models\\Pirate Ship");  
+            skyBack = Content.Load<Texture2D>(".\\Models\\sky");   
+            CannonBall = Content.Load<Model>(".\\Models\\Ball2");
             mdl_Enemy = Content.Load<Model>(".\\Models\\Pirate Ship");
+          
 
         }
 
+       
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
         /// all content.
@@ -81,22 +96,46 @@ namespace GP3_Coursework
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-
+            ChasePlayer(playerWorld);
+            //camera.Update(playerWorld);
             camera.Update(playerWorld);
-
             MovePlayer();
-
+           
+          
+            
             base.Update(gameTime);
         }
 
+         void ChasePlayer(Matrix objectToChase)
+        {
+            Vector3 desiredPosition;
+            Vector3 offset = new Vector3(2, 0, 10);
+
+            objectToChase.Right.Normalize();
+            objectToChase.Up.Normalize();
+
+            desiredPosition = Vector3.Transform(offset, objectToChase);
+
+            enemyPos = Vector3.SmoothStep(enemyPos, desiredPosition, .15f);
+
+            enemyWorld = Matrix.CreateTranslation(enemyPos);
+        }
+
+        
+
+        //Method used to handle input of player and move them around the environment. 
         public void MovePlayer()
         {
 
             KeyboardState keyBoardState = Keyboard.GetState();
 
-            if (keyBoardState.IsKeyDown(Keys.Space) && previousKeyBoardState.IsKeyUp(Keys.Space))
+            if (keyBoardState.IsKeyDown(Keys.Enter) && previousKeyBoardState.IsKeyUp(Keys.Enter))
             {
                 camera.SwitchCameraMode();
+            }
+            if (keyBoardState.IsKeyDown(Keys.Space) && previousKeyBoardState.IsKeyUp(Keys.Space))
+            {
+                FireCannon();
             }
  
             //Rotate Cube along its Up Vector
@@ -113,6 +152,7 @@ namespace GP3_Coursework
             if (keyBoardState.IsKeyDown(Keys.Up))
             {
                 playerWorld *= Matrix.CreateTranslation(playerWorld.Forward);
+
             }
             if (keyBoardState.IsKeyDown(Keys.Down))
             {
@@ -126,9 +166,18 @@ namespace GP3_Coursework
             {
                 playerWorld *= Matrix.CreateTranslation(playerWorld.Right);
             }
-
             previousKeyBoardState = keyBoardState;
        }
+
+        private void FireCannon()
+        {
+
+            for (int i = 0; i < 100; i++)
+            {
+                float variant = MathHelper.SmoothStep(10f, 8f, 2f);
+                enemyWorld *= Matrix.CreateTranslation(enemyWorld.Left)/variant;
+            }
+        }
 
         /// <summary>
         /// This is called when the game should draw itself.
@@ -137,14 +186,18 @@ namespace GP3_Coursework
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-           // Draw2D();
+            Draw2D();
             DrawModel(mdl_Player, playerWorld);
             DrawModel(mdl_Enemy, enemyWorld);
-            
+            Matrix scaleMat =  Matrix.CreateScale(-100f);
+           cannonWorld =  cannonWorld* scaleMat;
+            DrawModel(CannonBall, cannonWorld);
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
         }
+
+     
 
         private void Draw2D()
         {
@@ -158,6 +211,13 @@ namespace GP3_Coursework
 
             spriteBatch.End();
 
+            
+            GraphicsDevice.DepthStencilState = DepthStencilState.Default;
+            GraphicsDevice.BlendState = BlendState.Opaque;
+            GraphicsDevice.RasterizerState = RasterizerState.CullCounterClockwise;
+            GraphicsDevice.SamplerStates[0] = SamplerState.LinearWrap;
+            //graphics.GraphicsDevice.DepthStencilState.DepthBufferEnable = true;
+             
         }
 
         private void DrawModel(Model model, Matrix worldMatrix)
@@ -169,13 +229,14 @@ namespace GP3_Coursework
             {
                 foreach (BasicEffect effect in mesh.Effects)
                 {
-                 
+                    
                     effect.EnableDefaultLighting();
                     effect.World = modelTransforms[mesh.ParentBone.Index] * worldMatrix;
                     effect.View = camera.viewMatrix;
                     effect.Projection = camera.projectionMatrix;
                 }
                 mesh.Draw();
+
             }
 }
 }

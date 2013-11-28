@@ -94,8 +94,6 @@ namespace GP3_Coursework
 
             desiredTarget = target;
 
-
-
             offsetDistance = new Vector3(2, 10, 10); // set the distance the camera should be from the object,
             // used for 3rd person camera
 
@@ -147,6 +145,7 @@ namespace GP3_Coursework
             //The switch case which switches between the three types of cameras.
             switch (currentCameraMode)
             {
+                #region FreeCam Mode
                 case CameraMode.free:
 
                    
@@ -177,7 +176,7 @@ namespace GP3_Coursework
                 target = position + cameraRotation.Forward;
 
                     break;
-
+                #endregion
                 case CameraMode.chase:
                     
                     cameraRotation.Forward.Normalize();
@@ -214,8 +213,6 @@ namespace GP3_Coursework
 
                 
             }
-
-            
 
             viewMatrix = Matrix.CreateLookAt(position, target, cameraRotation.Up);
            
