@@ -175,7 +175,7 @@ namespace GP3_Coursework
                     //camera faces forard regardless of how it is rotated.
                 target = position + cameraRotation.Forward;
 
-                    break;
+                break;
                 #endregion
                 case CameraMode.chase:
                     
@@ -185,13 +185,11 @@ namespace GP3_Coursework
  
                     cameraRotation = Matrix.CreateFromAxisAngle(cameraRotation.Forward, roll);
 
-
                     //set the desired target to the object we are chasings position/
                     desiredTarget = chasedObjectsWorld.Translation;
 
-                    //Set the actual target to the desired target and allow a little pitch and yaw.
-                    //This ensures that the position of the camera stays smoothly behind the desired object at 
-                    //all times
+                    //Set actual target pos to be the desired target pos and use pitch and and yaw to ensure
+                    //that smooth transitioning occurs throughout
                     target = desiredTarget;
                     target += chasedObjectsWorld.Right * yaw;
                     target += chasedObjectsWorld.Up * pitch;

@@ -26,17 +26,18 @@ namespace GP3_Coursework
 
         #region model vars
         Matrix playerWorld;
+        Matrix playerRot;
+        Matrix playerTrans; 
         Model mdl_Player;
-        Vector3 playerPos = Vector3.Zero;
-        float playerRot = 0.0f;
-        Vector3 playerVelocity = Vector3.Zero;
-        Texture2D skyBack;
 
+        Vector3 playerVelocity;
+        Texture2D skyBack; 
         Model mdl_Enemy;
         Matrix enemyWorld;
         Vector3 enemyPos;
         Model CannonBall;
         Matrix cannonWorld;
+        Vector3 playerPos;
         Matrix enemyRot;
         
         #endregion
@@ -58,11 +59,13 @@ namespace GP3_Coursework
         {
             
            playerWorld = Matrix.Identity;
+           playerRot = Matrix.Identity;
+           playerTrans = Matrix.Identity;
+
             enemyWorld = Matrix.Identity;
             enemyRot = Matrix.Identity;
-
             playerPos = Vector3.Zero;
-        //    playerVelocity = Vector3.Zero;
+            playerVelocity = Vector3.Zero;
             base.Initialize();
             
         }
@@ -114,7 +117,7 @@ namespace GP3_Coursework
             camera.Update(playerWorld);
            // camera.Update(playerWorld);
            MovePlayer();
-         //  playerVelocity *= 0.95f; 
+           playerVelocity *= 0.95f; 
            
             //playerPos = playerWorld.Translation;
 
@@ -168,9 +171,8 @@ namespace GP3_Coursework
         public void MovePlayer()
         {
             Vector3 velocityToAdd = Vector3.Zero;
-
-            velocityToAdd.X = -(float)Math.Sin(playerRot);
-            velocityToAdd.Y -= (float)Math.Sin(playerRot);
+ 
+            KeyboardState keyBoardState = Keyboard.GetState();
 
             if (keyBoardState.IsKeyDown(Keys.Enter) && previousKeyBoardState.IsKeyUp(Keys.Enter))
             {
@@ -195,7 +197,18 @@ namespace GP3_Coursework
             //Move Cube Forward, Back, Left, and Right
             if (keyBoardState.IsKeyDown(Keys.Up))
             {
-                playerWorld *= Matrix.CreateTranslation(playerWorld.Forward);
+                
+                velocityToAdd*=0.01f;
+
+                playerVelocity += velocityToAdd;
+                playerPos = playerPos += playerVelocity;
+                
+               playerWorld *= Matrix.CreateTranslation(0.5f,0.5f,0.5f); 
+                 
+
+              //  playerWorld *= Matrix.CreateTranslation(playerWorld.Forward);
+                
+
             }
             if (keyBoardState.IsKeyDown(Keys.Down))
             {
