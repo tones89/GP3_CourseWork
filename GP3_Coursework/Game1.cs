@@ -114,24 +114,21 @@ namespace GP3_Coursework
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-<<<<<<< HEAD
-   
+
             float elapsed = (float)gameTime.ElapsedGameTime.Seconds;
 
-=======
->>>>>>> 504ead635f4add52cb3029999ab0047cde2f696d
+
             ArtificialIntellignce();
             ChasePlayer(playerWorld);
             camera.Update(playerWorld);
            // camera.Update(playerWorld);
            MovePlayer();
-<<<<<<< HEAD
          //  playerVelocity *= 0.95f; 
            
             //playerPos = playerWorld.Translation;
 
             
-=======
+
            playerPos = playerWorld.Translation;
 
 >>>>>>> 504ead635f4add52cb3029999ab0047cde2f696d
