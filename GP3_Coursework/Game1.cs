@@ -9,8 +9,11 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
+
+
 namespace GP3_Coursework
 {
+
     /// <summary>
     /// This is the main type for your game
     /// </summary>
@@ -18,38 +21,338 @@ namespace GP3_Coursework
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Camera camera = new Camera();
-        Enemy enemy = new Enemy(5, 1, 2);
-        //Player aPlayer = new Player(100);
-        KeyboardState keyBoardState = Keyboard.GetState();
-        KeyboardState previousKeyBoardState = Keyboard.GetState();
-
-        #region model vars
-        Matrix playerWorld;
-        Model mdl_Player;
-        Vector3 playerPos = Vector3.Zero;
-        float playerRot = 0.0f;
-        Vector3 playerVelocity = Vector3.Zero;
-        Texture2D skyBack;
-
-        Model mdl_Enemy;
-        Matrix enemyWorld;
-        Vector3 enemyPos;
-        Model CannonBall;
-        Matrix cannonWorld;
-<<<<<<< HEAD
-=======
-        Vector3 playerPos;
->>>>>>> 504ead635f4add52cb3029999ab0047cde2f696d
-        Matrix enemyRot;
+       // public CameraType cameraMode = CameraType.thirdPerson;
+        #region User Defined Variables
+        // Set the 3D model to draw.
         
+        //variables used to manage the models within the game
+        //each model is assigned a transformation matrix array to 
+        //monitor the models mesh's position.
+        private Model mdlPlayer;
+        //private Matrix[] mdlPlayerTransform;
+        Model mdl_OuterDome;
+        private Matrix[] mdlOuterDomeTrans;
+        Model mdl_Island;
+        private Matrix[] mdlIslandTransform;
+        Model mdl_Castle;
+        private Matrix[] mdlCastleTrans;
+        Model mdl_Tower;
+        private Matrix[] mdlTowerTrans;
+        Model mdl_Water;
+        private Matrix[] mdlWaterTrans;
+        Model mdl_Arrow;
+        Matrix[] mdlArrowTrans;
+        Arrow[] arrows = new Arrow[50];
+     
+        //default potiion variables for the static objects
+        Vector3 islandPos = Vector3.Up * -3;
+        Vector3 domePos = Vector3.Up * -3;
+        Vector3 waterPos = Vector3.Up * -3;
+        float islandRoation = 0f;
+
+        //an instance of the main camera class
+        Camera mainCamera = new Camera();
+        // An instance of the audio;
+        Audio audio = new Audio();
+        
+        //the array of cannonball structs, and
+        //associated model. used to store an 
+        //array of ammunition of the player
+        //we alos stor transformations for the 
+        //cannonball as it will be a moving object.
+        cannonBall[] cannonballs = new cannonBall[4];
+        Model mdl_CannonBall;
+        private Matrix[] mdlCannonBallTrans;
+
+       //Structs to hold static objects of the world/
+        //held in an array to allow them to be destroyed when shot
+        Castle[] castles = new Castle[1];
+        Tower[] towerArray = new Tower[1];
+      
+        // used to determine if the background soung is playing,
+        //allows music to be turned on and off.
+        bool playingSong = false;
+
+        //used to determine if the game is to be restarted. 
+        bool restart = false;
+
+        //delcare a font for displaying info to the player
+        SpriteFont aFont;
+
+        //an instance of the player, we give them a default health of 100;
+        Player playerOne = new Player(100);
+        KeyboardState oldKeyState = Keyboard.GetState();
+      
+  
+        /// <summary>
+        /// This method takes input from the keyboard and
+        /// performs a variety of tasks which will
+        /// be explained at each point
+        /// </summary>
+        private void HandleInput()
+        {
+
+            KeyboardState keyboardState = Keyboard.GetState();
+            
+            //delta is the velocity each frame to be applied to the player
+            Vector3 deltaVelocity = Vector3.Zero;
+
+           //assertain what direction the model is facing based on the rotation
+           deltaVelocity.X = -(float)Math.Sin(playerOne.PlayerRotation);
+           deltaVelocity.Z = -(float)Math.Cos(playerOne.PlayerRotation);
+
+            //If the left key is pressed, we add rotation to the player 
+            if (keyboardState.IsKeyDown(Keys.Left))
+            {
+                // Rotate player left 
+                
+                playerOne.PlayerRotation += 1.0f * 0.10f;
+            }
+
+
+
+            //As before, however with the right key.
+            if (keyboardState.IsKeyDown(Keys.Right))
+            {
+                // Rotate player  right.
+              
+                playerOne.PlayerRotation -= 1.0f * 0.10f;
+            }
+
+            //Used to move the player forward.
+
+            if (keyboardState.IsKeyDown(Keys.Up))
+            {
+               //Determine the deltaVelocity, bd add tihs to the players velocity, 
+                //thus generating movement
+
+              deltaVelocity *= 0.05f;
+              //mdlVelocity += mdlVelocityAdd;
+              playerOne.PlayerVelocity += deltaVelocity;
+             
+            }
+
+            if (keyboardState.IsKeyDown(Keys.Down))
+            {
+               //as before but this time, backwwards.
+                deltaVelocity *= -0.05f;
+                playerOne.PlayerVelocity += deltaVelocity;
+            }
+
+            //This function allows the player to fire using the left control key.
+            if (keyboardState.IsKeyDown(Keys.LeftControl) && oldKeyState.IsKeyUp(Keys.LeftControl))
+            {
+
+                //firstly we cycle over the amount of ammuniton(or cannonballs held
+                //within the struct. 
+                for (int i = 0; i < 3; i++)
+                {
+                    //if the cannonball struct is not active, then we perform the
+                    //logic therein for EACH cannonball
+                    if (!cannonballs[i].isActive)
+                    {
+                        //play the sound
+                        audio.PlaySoundEffect("cannonFire");
+                      
+                        //Allow the cannon to take into account the players rotation by create a rotational matrix based
+                        //on the players rotation
+                        Matrix cannonTransform = Matrix.CreateRotationY(playerOne.PlayerRotation) * 2;
+                        //Only allow the cannon to be fired from the left of the boat, for more realism. 
+                        cannonballs[i].direction = cannonTransform.Left;
+                        //set the speed, again rather fast to account for realism.
+                        cannonballs[i].speed = 30f;
+                       
+                        //set the cannons position to be the players position, and move off 
+                        //in the direction we set beforehand
+                        cannonballs[i].position = playerOne.PlayerPosition + cannonballs[i].direction;
+                        //set this boolean to true, meaning the cannon is only drawn when we press the key 
+                        cannonballs[i].isActive =true;
+                        //no need to continue, we therefore break out of the for loop
+                        break;
+                    }
+                }
+            }
+
+            //allow the user to exit the application  using the escape key
+
+            if (keyboardState.IsKeyDown(Keys.Escape) && oldKeyState.IsKeyUp(Keys.Escape))
+            {
+                this.Exit();
+            }
+
+            // if the user hits the delete key, we allow them to restart the game
+            if (keyboardState.IsKeyDown(Keys.Delete) && oldKeyState.IsKeyUp(Keys.Delete))
+            {
+                //we set restart to true.
+                restart = true;
+            }
+
+            //This is the key to confirm the user wishes to restar or quit...
+            if (keyboardState.IsKeyDown(Keys.Y) && oldKeyState.IsKeyUp(Keys.Y))
+            {
+
+                //if we are restarting, we must reset the variables to their defaults.
+                //These are the variables pertaining to the user, health- positioning ect. 
+                restart = false;
+                playerOne.PlayerPosition = new Vector3(0f, 0f, 80f);
+                playerOne.PlayerRotation = 0f;
+                playingSong = true;
+                playerOne.PlayerVelocity = Vector3.Zero;
+                playerOne.PlayerHealth = 100;
+
+
+                //we must also reset the structs of stationary objects, so that they exist,
+                //the nest time the player plays the game
+                for (int i = 0; i < castles.Length; i++)
+                {
+                    castles[i].isActive = true;
+
+                }
+
+                for (int i = 0; i < towerArray.Length; i++)
+                {
+                    towerArray[i].isActive = true;
+                }
+            }
+          
+            if (keyboardState.IsKeyDown(Keys.Tab) && oldKeyState.IsKeyUp(Keys.Tab))
+            {
+                mainCamera.SwitchCameraMode();
+            }
+/*
+            if (keyboardState.IsKeyDown(Keys.M) && oldKeyState.IsKeyUp(Keys.M))
+            {
+                
+                audio.PlaySong("backMusic");
+            }
+*/
+
+            //The following key is used to start the music
+            if (keyboardState.IsKeyDown(Keys.N) && oldKeyState.IsKeyUp(Keys.N))
+            {
+                playingSong = true;
+                
+            }
+
+            //This key is the key used to stop the music
+            if (keyboardState.IsKeyDown(Keys.M) && oldKeyState.IsKeyUp(Keys.M))
+            {
+
+                playingSong = false;
+            }
+             
+
+            //maintain an instance of the last key pressed, to test if the user has pressed , and relased a key 
+            oldKeyState = keyboardState;
+        }
+
+    
+
+
+
+        /// <summary>
+        /// This method is called to setup the basic transformations, and basic effects
+        /// for the given model.  Cycles through each of the meshes in the model and returns
+        /// the required array of bones. We need this matrix[] later to draw the model. 
+        /// </summary>
+        /// <param name="myModel">The model wihch we want to set up the meshes for</param>
+        /// <returns>It will return  transformation matrix  array which keeps track of all  the bones in the mesh
+        /// to allow movement and positioning of each model. </returns>
+  
+        private Matrix[] SetupEffectTransformDefaults(Model myModel)
+        {
+            Matrix[] absoluteTransforms = new Matrix[myModel.Bones.Count];
+            myModel.CopyAbsoluteBoneTransformsTo(absoluteTransforms);
+
+            foreach (ModelMesh mesh in myModel.Meshes)
+            {
+                foreach (BasicEffect effect in mesh.Effects)
+                {
+
+                    //these lines of code allow us to manipulate the colour, and effect
+                    //of the players appereance. We wish only to affect the player, so thereforewe search for
+                    //just the player mesh.
+                    if(mesh.Equals(playerOne.PlayerModel.Meshes[0]))
+                    {
+                        effect.LightingEnabled = true; // turn on the lighting subsystem.
+                        effect.DirectionalLight0.DiffuseColor = Color.Yellow.ToVector3();
+                        effect.DirectionalLight0.Direction = new Vector3(1, 0, 0);  // coming along the x-axis
+                       // effect.DirectionalLight0.SpecularColor = new Vector3(0, 1, 0); // with green highlights
+                        effect.DirectionalLight0.SpecularColor = Color.Gold.ToVector3();
+
+                    }
+                    else
+                    {
+                        effect.EnableDefaultLighting();
+                    }
+                 
+                   // effect.Projection = projectionMatrix;
+                  //  effect.View = viewMatrix;
+                     
+
+                }
+            }
+                return absoluteTransforms;
+            
+        }
+
+
+        /// <summary>
+        /// Although not implemented, this method calculates the distance between two models,
+        /// //usinf vector calculations, and would be used for A.I purposes
+        /// </summary>
+        /// <param name="playerPosition">The vector3 position of the player</param>
+        /// <param name="otherObject">The vector3 of the other object</param>
+        /// <returns>the distance between the two objects as a float</returns>
+        public float calculateDistanceToPlayer(Vector3 playerPosition,Vector3 otherObject)
+        {
+            float distance = Vector3.Distance(playerPosition, otherObject);
+            return distance;
+        }
+        
+        
+
+        /// <summary>
+        /// This method cycles through a given modesl meshes, and assigns a projection, and view matrix 
+        /// for the model. This method then multiplies the bone transforms, from previously, by the objects,
+        /// position and roation matrix to draw the model in the correct orientation and position each frame.
+        /// I have also assigned fog to the scene for each object, making it black, to simulate night
+        /// </summary>
+        /// <param name="model">The model to be drawn</param>
+        /// <param name="modelTransform">Matrix holding rotation and movement information about the model</param>
+        /// <param name="absoluteBoneTransforms"> The array of bone transforms from the previous method</param>
+        public void DrawModel(Model model, Matrix modelTransform, Matrix[] absoluteBoneTransforms)
+        {
+            //Draw the model, a model can have multiple meshes, so loop
+            foreach (ModelMesh mesh in model.Meshes)
+            {
+                //This is where the mesh orientation is set
+                foreach (BasicEffect effect in mesh.Effects)
+                {
+
+                    effect.FogEnabled = true;
+                    effect.FogColor = Color.Black.ToVector3() ;
+                    effect.FogStart = 5.0f;
+                    effect.FogEnd = 65.0f;
+                    effect.World = absoluteBoneTransforms[mesh.ParentBone.Index] * modelTransform;
+                    effect.View = mainCamera.viewMatrix;
+                    effect.Projection = mainCamera.projectionMatrix;
+
+                }
+                //Draw the mesh, will use the effects set above.
+                mesh.Draw();
+            }
+        }
+        
+
+
         #endregion
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-           
+            this.IsMouseVisible = false ;
         }
 
         /// <summary>
@@ -60,19 +363,14 @@ namespace GP3_Coursework
         /// </summary>
         protected override void Initialize()
         {
-            
-           playerWorld = Matrix.Identity;
-            enemyWorld = Matrix.Identity;
-            enemyRot = Matrix.Identity;
-<<<<<<< HEAD
 
-            playerPos = Vector3.Zero;
-        //    playerVelocity = Vector3.Zero;
-=======
             
->>>>>>> 504ead635f4add52cb3029999ab0047cde2f696d
+            // TODO: Add your initialization logic here
+            this.IsMouseVisible = false;
+            Window.Title = "Night Raid";
+            
+          //  InitializeTransform();
             base.Initialize();
-            
         }
 
         /// <summary>
@@ -81,169 +379,245 @@ namespace GP3_Coursework
         /// </summary>
         protected override void LoadContent()
         {
-            
-            
-            // Create  new SpriteBatch, which can be used to draw textures.
+
+            //Setting the players default positions, rotations etc
+            playerOne.PlayerPosition = new Vector3(0f, 0f, 80f);
+            playerOne.PlayerRotation = 0f;
+            playerOne.PlayerVelocity = Vector3.Zero;
+
+
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            mdl_Player = Content.Load<Model>(".\\Models\\Pirate Ship");  
-            skyBack = Content.Load<Texture2D>(".\\Models\\sky");   
-            CannonBall = Content.Load<Model>(".\\Models\\Ball2");
-            mdl_Enemy = Content.Load<Model>(".\\Models\\Pirate Ship");
-          
+            oldKeyState = Keyboard.GetState() ;
+            
 
+            // This is where we load each model, and assign their
+            //transform matrix []'s
+            mdlPlayer = Content.Load<Model>(".\\Models\\Pirate Ship");
+            playerOne.PlayerModel = mdlPlayer;
+            playerOne.Transforms = SetupEffectTransformDefaults(playerOne.PlayerModel);
+            mdl_OuterDome = Content.Load<Model>(".\\Models\\Dome"); //the skyDome
+                mdlOuterDomeTrans = SetupEffectTransformDefaults(mdl_OuterDome);
+            mdl_Water = Content.Load<Model>(".\\Models\\Water");    //The water
+                mdlWaterTrans = SetupEffectTransformDefaults(mdl_Water);
+            mdl_Island = Content.Load<Model>(".\\Models\\Island");  //The central island
+                mdlIslandTransform = SetupEffectTransformDefaults(mdl_Island);
+            mdl_Tower = Content.Load<Model>(".\\Models\\castleTower");    // The Tower
+                mdlTowerTrans = SetupEffectTransformDefaults(mdl_Tower);    
+            mdl_Castle = Content.Load<Model>(".\\Models\\Castl");   //The castle
+                mdlCastleTrans = SetupEffectTransformDefaults(mdl_Castle);
+            mdl_CannonBall = Content.Load<Model>(".\\Models\\CannonBall");  //The cannonball
+                mdlCannonBallTrans = SetupEffectTransformDefaults(mdl_CannonBall);
+            mdl_Arrow = Content.Load<Model>(".\\Models\\Arrow");    
+                mdlArrowTrans = SetupEffectTransformDefaults(mdl_Arrow);
+            
+            //==================================================
+            //==================Font Content====================
+
+            aFont = Content.Load<SpriteFont>(".\\Fonts\\HUD");  
+
+            SoundEffect islandcollision = Content.Load<SoundEffect>(".\\Audio\\Manisland");
+                audio.AddSoundEffect("manIsland", islandcollision);
+
+            SoundEffect cannonFire = Content.Load<SoundEffect>(".\\Audio\\cannonFire");
+                audio.AddSoundEffect("cannonFire", cannonFire);
+
+            SoundEffect cannonIsland = Content.Load<SoundEffect>(".\\Audio\\cannonIsland");
+                audio.AddSoundEffect("cannonIsland",cannonIsland);
+
+            SoundEffect cannonTower = Content.Load<SoundEffect>(".\\Audio\\explosion");
+                audio.AddSoundEffect("cannonTower", cannonTower);
+
+            Song background = Content.Load<Song>(".\\Audio\\backMusic");
+                MediaPlayer.Play(background);
+                playingSong = true;
+
+            for (int i = 0; i < 1; i++)
+                {
+                    if (!towerArray[i].isActive)
+                    {
+                       
+                        towerArray[i].isActive = true;
+                    }
+                }
+
+                for (int c = 0; c < 1; c++)
+                {
+                    if (!castles[c].isActive)
+                    {
+                        castles[c].isActive = true;
+               
+                    }
+                }
+
+
+            // TODO: use this.Content to load your game content here
         }
 
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// all content.
-        /// </summary>
-        protected override void UnloadContent()
-        {
-            // TODO: Unload any non ContentManager content here
-        }
+     
 
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        protected override void Update(GameTime gameTime)
+        protected override void
+            Update(GameTime gameTime)
         {
+
+
 
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
+         
+         //   Matrix modelTransform = makeTransform(mdlRotation, mdlPosition);
+            //mainCamera.Update(modelTransform);
+           Matrix transform =  playerOne.Transformation = makeTransform(playerOne.PlayerRotation, playerOne.PlayerPosition);
+           mainCamera.Update(transform);
+            HandleInput();
+            ManageCollisions();
 
 
-            float elapsed = (float)gameTime.ElapsedGameTime.Seconds;
+            float timeDelta = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            for (int i = 0; i < 3; i++)
+            {
+                cannonballs[i].Update(timeDelta);
+            }
+            for (int i = 0; i < 1; i++)
+            {
+                towerArray[i].towerPosition = new Vector3(30f, 1f, 30f);
+                towerArray[i].towerRotation = 0f;
+            }
+              
+
+                for (int c = 0; c < 1; c++)
+                {
+                    castles[c].position = new Vector3(-30f, 9f, -25f);
+                    castles[c].rotation = 600;
+                }
+
+                if (playingSong == true)
+                {
+                    MediaPlayer.Resume();
+
+                }
+                else if (playingSong == false)
+                {
+                    MediaPlayer.Pause();
+                }
 
 
-            ArtificialIntellignce();
-            ChasePlayer(playerWorld);
-            camera.Update(playerWorld);
-           // camera.Update(playerWorld);
-           MovePlayer();
-         //  playerVelocity *= 0.95f; 
-           
-            //playerPos = playerWorld.Translation;
+                // Add velocity to the current position.
+                //mdlPosition += mdlVelocity;
 
+                playerOne.PlayerPosition += playerOne.PlayerVelocity;
+                playerOne.PlayerVelocity *= 0.95f;
+                // Bleed off velocity over time.
+             //   mdlVelocity *= 0.95f;
+                base.Update(gameTime);
             
-
-           playerPos = playerWorld.Translation;
-
->>>>>>> 504ead635f4add52cb3029999ab0047cde2f696d
-            base.Update(gameTime);
         }
 
-
-
-        void ArtificialIntellignce()
+        void ManageCollisions()
         {
 
-            Vector3 speed = new Vector3(0.1f, 0f, 0f);
-            enemyRot.Forward.Normalize();
-            enemyRot.Up.Normalize();
-            enemyRot.Right.Normalize();
-<<<<<<< HEAD
-            
-            Vector3 desiredPosition;
-            //float thing =(float) Math.Atan2(enemyPos.X - playerPos.X, enemyPos.Y - playerPos.Y);
-            
-            desiredPosition = Vector3.Transform(playerPos, enemyWorld);
-            
-            enemyPos = Vector3.SmoothStep(enemyPos, desiredPosition, .15f);
-            enemyWorld *= Matrix.CreateTranslation(enemyPos);
+            BoundingSphere boatSphere = new BoundingSphere(
+                playerOne.PlayerPosition, playerOne.PlayerModel.Meshes[0].BoundingSphere.Radius * 0.025f);
+            //BoundingSphere boatSphere = new BoundingSphere(
+              //  mdlPosition, mdlPlayer.Meshes[0].BoundingSphere.Radius * 0.025f);
 
-=======
-            enemyWorld.Right.Normalize();
-            enemyWorld.Up.Normalize();
-            Vector3 desiredPosition;
-            float thing =(float) Math.Atan2(enemyPos.X - playerPos.X, enemyPos.Y - playerPos.Y);
+            BoundingSphere islandSphere = new BoundingSphere(
+                islandPos, mdl_Island.Meshes[0].BoundingSphere.Radius * 1.7f);
 
-            //enemyPos = Vector3.Lerp(enemyWorld.Up, playerWorld.Up, thing);
-          //  enemyWorld = Matrix.CreateFromAxisAngle(enemyWorld.Up, thing);
-            desiredPosition = Vector3.Transform(speed, enemyWorld);
-            enemyPos = Vector3.SmoothStep(enemyPos, desiredPosition, .15f);
-            enemyWorld = Matrix.CreateTranslation(enemyPos) * Matrix.CreateFromAxisAngle(enemyWorld.Up, thing) *enemyWorld ;
->>>>>>> 504ead635f4add52cb3029999ab0047cde2f696d
+            BoundingSphere domeSphere = new BoundingSphere(
+                domePos, mdl_OuterDome.Meshes[0].BoundingSphere.Radius * 0.5f);
+            BoundingSphere towerSphere;
 
+            if (boatSphere.Intersects(islandSphere))
+            {
+                audio.PlaySoundEffect("manIsland");
+                playerOne.PlayerHealth -= 10;
+                playerOne.PlayerVelocity = Vector3.Negate(playerOne.PlayerVelocity);
+                playerOne.PlayerPosition += playerOne.PlayerVelocity/2;
+                if (playerOne.PlayerHealth<=0)
+                {
+                    playerOne.PlayerHealth = 0;
+                    audio.StopSoundEffect("manIsland");
+                    playerOne.PlayerVelocity = Vector3.Zero;
+                    restart = true;
+                }
+               /*
+                playerHealth -= 10;
+
+                if (playerHealth <= 0)
+                {
+                    playerHealth = 0;
+                    audio.StopSoundEffect("manIsland");
+                    mdlVelocity = Vector3.Zero;
+                    restart = true;
+                }
+                mdlVelocity = Vector3.Negate(mdlVelocity);
+                mdlPosition += mdlVelocity / 2;
+                */
+            }
+
+            
+            for (int i = 0; i<cannonballs.Length; i++)
+            {
+                if (cannonballs[i].isActive)
+                {
+                    BoundingSphere CannonSphere = new BoundingSphere(
+                        cannonballs[i].position, mdl_CannonBall.Meshes[0].BoundingSphere.Radius * 0.95f);
+                   
+                    float modifier = islandSphere.Radius * 0.5f;
+                    islandSphere.Radius = modifier;
+                    if(CannonSphere.Intersects(islandSphere))
+                    {
+                        audio.PlaySoundEffect("cannonIsland");
+                        cannonballs[i].isActive = false;
+                        break;
+                    }
+                        for (int t = 0; t <towerArray.Length; t++)
+                        {
+                            if (towerArray[t].isActive)
+                            {
+                                towerSphere = new BoundingSphere(
+                                    towerArray[t].towerPosition, mdl_Tower.Meshes[0].BoundingSphere.Radius * 0.0100f);
+                                     float furtherReduct = towerSphere.Radius * 0.25f;
+                                      towerSphere.Radius = furtherReduct;
+                                        if (CannonSphere.Intersects(towerSphere))
+                                        {
+                                            audio.PlaySoundEffect("cannonTower");
+                                            towerArray[t].isActive = false;
+                                            cannonballs[i].isActive = false;
+                                            break;
+                                        }
+                            }
+                        }
+
+                                            for (int c = 0; c < castles.Length; c++)
+                                            {
+                                                if (castles[c].isActive)
+                                                {
+                                                    BoundingSphere castleSphere = new BoundingSphere(
+                                                        castles[c].position, mdl_Castle.Meshes[0].BoundingSphere.Radius * 0.0010f);
+                                                    float furtherReduct = castleSphere.Radius * 0.25f;
+                                                    castleSphere.Radius = furtherReduct;
+                                                    if (CannonSphere.Intersects(castleSphere))
+                                                    {
+                                                        audio.PlaySoundEffect("cannonTower");
+                                                        castles[c].isActive = false;
+                                                        cannonballs[i].isActive = false;
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                }
+            }
+             
         }
-
-         void ChasePlayer(Matrix objectToChase)
-        {
-            enemyWorld.Right.Normalize();
-            enemyWorld.Up.Normalize();
-
-            Vector3 desiredPosition;
-            Vector3 offset = new Vector3(2, 0, 10);
-
-            objectToChase.Right.Normalize();
-            objectToChase.Up.Normalize();
-
-<<<<<<< HEAD
-            //float distance = Vector3.Distance(enemyPos, playerPos);
-=======
             
->>>>>>> 504ead635f4add52cb3029999ab0047cde2f696d
-            desiredPosition = Vector3.Transform(offset, objectToChase);
-
-            enemyPos = Vector3.SmoothStep(enemyPos, desiredPosition, .2f);
-
-            enemyWorld = Matrix.CreateTranslation(enemyPos);
-        }
-
-        
-        
-        //Method used to handle input of player and move them around the environment. 
-        public void MovePlayer()
-        {
-            Vector3 velocityToAdd = Vector3.Zero;
-
-            velocityToAdd.X = -(float)Math.Sin(playerRot);
-            velocityToAdd.Y -= (float)Math.Sin(playerRot);
-
-            if (keyBoardState.IsKeyDown(Keys.Enter) && previousKeyBoardState.IsKeyUp(Keys.Enter))
-            {
-                camera.SwitchCameraMode();
-            }
-            if (keyBoardState.IsKeyDown(Keys.Space) && previousKeyBoardState.IsKeyUp(Keys.Space))
-            {
-                FireCannon();
-            }
- 
-            //Rotate Cube along its Up Vector
-            if (keyBoardState.IsKeyDown(Keys.X))
-            {
-                playerWorld = Matrix.CreateFromAxisAngle(Vector3.Up, .02f) * playerWorld;
-            }
-            if (keyBoardState.IsKeyDown(Keys.Z))
-            {
-                
-                playerWorld = Matrix.CreateFromAxisAngle(Vector3.Up, -.02f) * playerWorld;
-            }
- 
-            //Move Cube Forward, Back, Left, and Right
-            if (keyBoardState.IsKeyDown(Keys.Up))
-            {
-                playerWorld *= Matrix.CreateTranslation(playerWorld.Forward);
-            }
-            if (keyBoardState.IsKeyDown(Keys.Down))
-            {
-                playerWorld *= Matrix.CreateTranslation(playerWorld.Backward);
-            }
-            previousKeyBoardState = keyBoardState;
-       }
-        
-        
-        private void FireCannon()
-        {
-
-            for (int i = 0; i < 100; i++)
-            {
-                float variant = MathHelper.SmoothStep(10f, 8f, 2f);
-                enemyWorld *= Matrix.CreateTranslation(enemyWorld.Left)/variant;
-            }
-        }
 
         /// <summary>
         /// This is called when the game should draw itself.
@@ -252,57 +626,104 @@ namespace GP3_Coursework
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            Draw2D();
-            DrawModel(mdl_Player,playerWorld);
-            DrawModel(mdl_Enemy, enemyWorld);
-            Matrix scaleMat =  Matrix.CreateScale(-100f);
-           cannonWorld =  cannonWorld* scaleMat;
-            DrawModel(CannonBall, cannonWorld);
-            // TODO: Add your drawing code here
+
+            for (int i = 0; i < 3; i++)
+            {
+                if (cannonballs[i].isActive)
+                {
+                    Matrix cannonTrans =  Matrix.CreateTranslation(cannonballs[i].position);
+                    DrawModel(mdl_CannonBall, cannonTrans, mdlCannonBallTrans);
+                }
+            }
+
+            for (int i = 0; i < 1; i++)
+            {
+                if (towerArray[i].isActive)
+                {
+                    Matrix towerTrans = makeTransform(towerArray[i].towerRotation, towerArray[i].towerPosition);
+                    DrawModel(mdl_Tower, towerTrans, mdlTowerTrans); 
+                }
+            }
+
+            for (int c = 0; c < 1; c++)
+            {
+                if (castles[c].isActive)
+                {
+                    Matrix castleTrans = makeTransform(castles[c].rotation, castles[c].position);
+                    DrawModel(mdl_Castle, castleTrans, mdlCastleTrans);
+                }
+            }
+
+            for (int a = 0; a < arrows.Length; a++)
+            {
+                if (arrows[a].isActive)
+                {
+                    Matrix arrowTrans = Matrix.CreateTranslation(arrows[a].position);
+                    DrawModel(mdl_Arrow, arrowTrans, mdlArrowTrans);
+                }
+            }
+
+
+          //  Matrix modelTransform = makeTransform(mdlRotation, mdlPosition);
+            Matrix playerTransform = makeTransform(playerOne.PlayerRotation, playerOne.PlayerPosition);
+            DrawModel(playerOne.PlayerModel, playerTransform, playerOne.Transforms);   
+            
+          //  DrawModel(mdlPlayer, modelTransform, mdlPlayerTransform);
+            Matrix terrainTrans = makeTransform(0f, domePos);
+                DrawModel(mdl_OuterDome, terrainTrans, mdlOuterDomeTrans);
+            Matrix waterTrans = makeTransform(0f, waterPos);
+                DrawModel(mdl_Water, waterTrans, mdlWaterTrans);
+            Matrix islandTrans = makeTransform(islandRoation, islandPos);
+                DrawModel(mdl_Island, islandTrans, mdlIslandTransform);
+
+                Draw2d();
+               
 
             base.Draw(gameTime);
         }
 
-     
-
-        private void Draw2D()
+        
+           
+        void Draw2d()
         {
             spriteBatch.Begin();
+           
+           // spriteBatch.DrawString(aFont, "Men Aboard:" + playerHealth.ToString(), new Vector2(100, 20), Color.Black);
+            spriteBatch.DrawString(aFont, "Men Aboard:  " + playerOne.PlayerHealth.ToString(), new Vector2(100, 20), Color.White);
 
-            int i_Height = GraphicsDevice.PresentationParameters.BackBufferHeight;
-            int i_Width = GraphicsDevice.PresentationParameters.BackBufferWidth;
-            Rectangle rec_BackRect = new Rectangle(0, 0, i_Width, i_Height);
-
-            spriteBatch.Draw(skyBack, rec_BackRect, Color.White);
-
-            spriteBatch.End();
-    
-            GraphicsDevice.DepthStencilState = DepthStencilState.Default;
-            GraphicsDevice.BlendState = BlendState.Opaque;
-            GraphicsDevice.RasterizerState = RasterizerState.CullCounterClockwise;
-            GraphicsDevice.SamplerStates[0] = SamplerState.LinearWrap;
-            //graphics.GraphicsDevice.DepthStencilState.DepthBufferEnable = true;
-             
-        }
-
-        private void DrawModel(Model model, Matrix worldMatrix)
-        {
-            Matrix[] modelTransforms = new Matrix[model.Bones.Count];
-            model.CopyAbsoluteBoneTransformsTo(modelTransforms);
-
-            foreach (ModelMesh mesh in model.Meshes)
+            if (restart == true)
             {
-                foreach (BasicEffect effect in mesh.Effects)
-                {
-                    
-                    effect.EnableDefaultLighting();
-                    effect.World = modelTransforms[mesh.ParentBone.Index] * worldMatrix;
-                    effect.View = camera.viewMatrix;
-                    effect.Projection = camera.projectionMatrix;
-                }
-                mesh.Draw();
-
+               
+                spriteBatch.DrawString(aFont, " Do you want to restart? Hit Y to restart: Otherwise hit escape to quit", new Vector2(Window.ClientBounds.Height/2, Window.ClientBounds.Width / 2), Color.GhostWhite);
             }
+            spriteBatch.End();
+           
+            GraphicsDevice.BlendState = BlendState.Opaque;
+            GraphicsDevice.DepthStencilState = DepthStencilState.Default;
+            GraphicsDevice.SamplerStates[0] = SamplerState.LinearWrap;
+
         }
+
+        Matrix makeTransform(float rotation, Vector3 position)
+        {
+            return Matrix.CreateRotationY(rotation)*Matrix.CreateTranslation(position);
+        }
+
+
+       
+        /// <summary>
+        /// UnloadContent will be called once per game and is the place to unload
+        /// all content.
+        /// </summary>
+        protected override void UnloadContent()
+        {
+            
+            // TODO: Unload any non ContentManager content here
+        }
+
+
+  
     }
 }
+    
+   

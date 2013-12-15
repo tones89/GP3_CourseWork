@@ -26,10 +26,10 @@ namespace GP3_Coursework
 {
     class Camera
     {
-        
+
         public CameraMode currentCameraMode = CameraMode.chase; //setting default camera mode to chase camera 
 
-        private Vector3 position; // the position of the camera in  3d space
+        public Vector3 position; // the position of the camera in  3d space
         private Vector3 target; // where the camera is going to look at.
 
         public Matrix viewMatrix, projectionMatrix; // the two crucial matrices for a 3d camera. 
@@ -94,7 +94,8 @@ namespace GP3_Coursework
 
             desiredTarget = target;
 
-            offsetDistance = new Vector3(2, 10, 10); // set the distance the camera should be from the object,
+            offsetDistance = new Vector3(20, 20, 10); // set the distance the camera should be from the object,
+           // offsetDistance = new Vector3(-10, 2, 0); // set the distance the camera should be from the object,
             // used for 3rd person camera
 
             projectionMatrix = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45.0f), 16 / 9, .5f, 500f);   //Creating a basic
@@ -142,7 +143,7 @@ namespace GP3_Coursework
         /// we wish to follow.</param>
         private void UpdateViewMatrix(Matrix chasedObjectsWorld)
         {
-            //The switch case which switches between the three types of cameras.
+            //The switch case which switches between the types of cameras.
             switch (currentCameraMode)
             {
                 #region FreeCam Mode
@@ -192,7 +193,7 @@ namespace GP3_Coursework
                     //that smooth transitioning occurs throughout
                     target = desiredTarget;
                     target += chasedObjectsWorld.Right * yaw;
-                    target += chasedObjectsWorld.Up * pitch;
+                    target += chasedObjectsWorld.Up * 0.5f;
 
                     //set the desired position of the camera, could  just be the 
                     //offest vector. But to take rotation of chase object into account, we
@@ -213,6 +214,8 @@ namespace GP3_Coursework
             }
 
             viewMatrix = Matrix.CreateLookAt(position, target, cameraRotation.Up);
+
+
            
         }
 
@@ -295,12 +298,8 @@ namespace GP3_Coursework
                 }
             }
 
-
-           
-
             
         }
       
-          
     }
 }

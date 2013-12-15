@@ -11,14 +11,61 @@ namespace GP3_Coursework
 {
     class Player
     {
-        private int i_PlayerHealth;
+        private int playerHealth;
+
+        public int PlayerHealth
+        {
+            get { return playerHealth; }
+            set { playerHealth = value; }
+        }
+
+
+        Vector3 playerPosition;
+
+        public Vector3 PlayerPosition
+        {
+            get { return playerPosition; }
+            set { playerPosition = value; }
+        }
+        Vector3 playerVelocity;
+
+        public Vector3 PlayerVelocity
+        {
+            get { return playerVelocity; }
+            set { playerVelocity = value; }
+        }
+        float playerRotation;
+
+        public float PlayerRotation
+        {
+            get { return playerRotation; }
+            set { playerRotation = value; }
+        } 
         private int i_Ammo;
-        public Matrix[] transforms;
-        public Matrix playerWorld;
-        public Model model;
+        private Matrix[] transforms;
+        public Matrix[] Transforms
+        
+        {
+            get { return transforms; }
+            set { transforms = value; }
+        }
+        private Matrix transformation;
+
+        public Matrix Transformation
+        {
+            get { return transformation; }
+            set { transformation = value; }
+        }
+        private Model playerModel;
+
+        public Model PlayerModel
+        {
+            get { return playerModel; }
+            set { playerModel = value; }
+        }
         public KeyboardState keyBoardState = Keyboard.GetState();
         public KeyboardState previousKeyBoardState = Keyboard.GetState();
-        Camera camera = new Camera();
+       // Camera camera = new Camera();
 
         /// <summary>
         /// The constructor for the creation of a new player
@@ -27,14 +74,14 @@ namespace GP3_Coursework
         /// <param name="modelName"> The name of the model used to represent the player</param>
         public Player(int Health)
         {
-            i_PlayerHealth = Health;
+            playerHealth = Health;
             i_Ammo = 4;
-            playerWorld = Matrix.Identity;
+           // playerWorld = Matrix.Identity;
         }
 
         public int getHealth()
         {
-            return i_PlayerHealth;
+            return playerHealth;
         }
 
         public int getAmmo()
@@ -49,8 +96,8 @@ namespace GP3_Coursework
         /// <returns>Returns the players health</returns>
         public int AddHealth(int health) 
         {
-            i_PlayerHealth += health;
-            return i_PlayerHealth;
+            playerHealth += health;
+            return playerHealth;
         }
 
         /// <summary>
@@ -60,15 +107,17 @@ namespace GP3_Coursework
         /// <returns> the players health</returns>
         public int DeductHealth(int health,int enemyPower)
         {
-            i_PlayerHealth -= health*enemyPower;
-            return i_PlayerHealth;
+            playerHealth -= health * enemyPower;
+            return playerHealth;
         }
+
+        
 
 
         public int DeductHealth(int health)
         {
-            i_PlayerHealth -= health ;
-            return i_PlayerHealth;
+            playerHealth -= health;
+            return playerHealth;
         }
 
         /// <summary>
@@ -93,8 +142,8 @@ namespace GP3_Coursework
 
         public void Update()
         {
-            HandleInput();
-            camera.Update(playerWorld);
+          //  HandleInput();
+          //  camera.Update(playerWorld);
           
         }
 
@@ -113,30 +162,30 @@ namespace GP3_Coursework
             //Rotate Cube along its Up Vector
             if (keyBoardState.IsKeyDown(Keys.X))
             {
-                playerWorld = Matrix.CreateFromAxisAngle(Vector3.Up, .02f) * playerWorld;
+                //playerWorld = Matrix.CreateFromAxisAngle(Vector3.Up, .02f) * playerWorld;
             }
             if (keyBoardState.IsKeyDown(Keys.Z))
             {
-                playerWorld = Matrix.CreateFromAxisAngle(Vector3.Up, -.02f) * playerWorld;
+                //playerWorld = Matrix.CreateFromAxisAngle(Vector3.Up, -.02f) * playerWorld;
             }
 
             //Move Cube Forward, Back, Left, and Right
             if (keyBoardState.IsKeyDown(Keys.Up))
             {
-                playerWorld *= Matrix.CreateTranslation(playerWorld.Forward);
+//                playerWorld *= Matrix.CreateTranslation(playerWorld.Forward);
 
             }
             if (keyBoardState.IsKeyDown(Keys.Down))
             {
-                playerWorld *= Matrix.CreateTranslation(playerWorld.Backward);
+  //              playerWorld *= Matrix.CreateTranslation(playerWorld.Backward);
             }
             if (keyBoardState.IsKeyDown(Keys.Left))
             {
-                playerWorld *= Matrix.CreateTranslation(-playerWorld.Right);
+    //            playerWorld *= Matrix.CreateTranslation(-playerWorld.Right);
             }
             if (keyBoardState.IsKeyDown(Keys.Right))
             {
-                playerWorld *= Matrix.CreateTranslation(playerWorld.Right);
+      //          playerWorld *= Matrix.CreateTranslation(playerWorld.Right);
             }
             previousKeyBoardState = keyBoardState;
         }

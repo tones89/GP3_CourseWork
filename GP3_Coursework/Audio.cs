@@ -7,8 +7,9 @@ namespace GP3_Coursework
     class Audio
     {
 
-        Dictionary<string, Song> dc_SongCollection;
-        Dictionary<string, SoundEffect> dc_SoundFxCollection;
+        Dictionary<string, Song> dc_SongCollection = new Dictionary<string, Song>();
+        Dictionary<string, SoundEffect> dc_SoundFxCollection = new Dictionary<string,SoundEffect>();
+        public bool isPlaying = true;
 
         public void addSong(string songName, Song songObject)
         {
@@ -37,27 +38,57 @@ namespace GP3_Coursework
         /// Play the given song
         /// </summary>
         /// <param name="songName"> The name of the song to play</param>
-        public void PlaySong(string songName)
-        
+        public void PlaySong(string songName)       
         {
             if (dc_SongCollection.ContainsKey(songName))
             {
                 Song songToPlay = dc_SongCollection[songName];
-                MediaPlayer.Play(songToPlay);
+                    MediaPlayer.IsRepeating = true;
+                    MediaPlayer.Play(songToPlay);  
             }
             else
                 return;
                 
         }
 
-        public void PlaySoundEffect(SoundEffect fxName, SoundEffectInstance sfxi_FxName)        
+        public void stopSong()
         {
+            MediaPlayer.Pause();
+        }
 
-            sfxi_FxName = fxName.CreateInstance();
-            sfxi_FxName.Play();
+        public void startSong()
+        {
+            MediaPlayer.Resume();
         }
 
         
+
+        public void PlaySoundEffect(string fxName)        
+        {
+            if(dc_SoundFxCollection.ContainsKey(fxName))
+            {
+                SoundEffect.MasterVolume = 1f;
+                SoundEffect temp = dc_SoundFxCollection[fxName];
+                temp.Play();    
+            }
+        }
+
+        public void StopSoundEffect(string fxName)
+        {
+            if (dc_SoundFxCollection.ContainsKey(fxName))
+            {
+                SoundEffect temp = dc_SoundFxCollection[fxName];
+                SoundEffect.MasterVolume=0f;
+                
+            }
+        }
+        public void DelSound(string fxName)
+        {
+            if (dc_SoundFxCollection.ContainsKey(fxName))
+            {
+                dc_SoundFxCollection.Remove(fxName);
+            }
+        }
 
     }
 }
