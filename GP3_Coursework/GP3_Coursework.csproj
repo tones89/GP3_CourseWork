@@ -73,12 +73,6 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BEPUphysics">
-      <HintPath>..\..\..\BEPU\x86\Release\BEPUphysics.dll</HintPath>
-    </Reference>
-    <Reference Include="DPSF">
-      <HintPath>C:\DPSF\DPSF.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
       <Private>False</Private>
     </Reference>
@@ -131,7 +125,6 @@
     <Compile Include="Camera.cs" />
     <Compile Include="CannonBall.cs" />
     <Compile Include="Castle.cs" />
-    <Compile Include="Enemy.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
@@ -179,6 +172,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="GP3_Coursework_TemporaryKey.pfx" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
