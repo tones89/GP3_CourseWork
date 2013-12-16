@@ -2,24 +2,6 @@
 <XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline" xmlns:Framework="Microsoft.Xna.Framework" xmlns:Processors="Microsoft.Xna.Framework.Content.Pipeline.Processors">
   <Asset Type="Pipeline:BuildItemCollection">
     <Item>
-      <Source>Fonts\DrWho.spritefont</Source>
-      <Name>Fonts\DrWho</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <Options>None</Options>
-      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Fonts\DrWho.xnb</Output>
-      <Time>2013-11-06T19:53:39.7729967+00:00</Time>
-    </Item>
-    <Item>
-      <Source>Fonts\HUD.spritefont</Source>
-      <Name>Fonts\HUD</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <Options>None</Options>
-      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Fonts\HUD.xnb</Output>
-      <Time>2013-12-15T17:15:44.3897699+00:00</Time>
-    </Item>
-    <Item>
       <Source>Models\Pirate Ship.x</Source>
       <Name>Models\Pirate Ship</Name>
       <Importer>XImporter</Importer>
@@ -32,7 +14,7 @@
       <Time>2009-06-14T20:30:21.674+01:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Models\Pirate Ship_0.xml</Key>
-        <Value>2013-12-15T17:15:45.6708432+00:00</Value>
+        <Value>2013-12-16T02:51:02.5053729+00:00</Value>
       </Dependency>
       <Request>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\Pirate Ship_0.xnb</Request>
     </Item>
@@ -46,7 +28,7 @@
       <Time>2013-11-27T18:13:26.7300362+00:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Models\Ball2_0.xml</Key>
-        <Value>2013-12-15T17:15:46.8539109+00:00</Value>
+        <Value>2013-12-16T02:51:05.0605191+00:00</Value>
       </Dependency>
     </Item>
     <Item>
@@ -62,7 +44,7 @@
       <Time>2013-12-10T13:34:18.1892429+00:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Models\Castl_0.xml</Key>
-        <Value>2013-12-15T17:15:47.2009307+00:00</Value>
+        <Value>2013-12-16T02:51:05.6245513+00:00</Value>
       </Dependency>
       <Request>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\WHTCON3_0.xnb</Request>
       <Request>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\GRYDIRT1_0.xnb</Request>
@@ -82,7 +64,7 @@
       <Time>2013-12-10T14:10:46.2093905+00:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Models\castleTower_0.xml</Key>
-        <Value>2013-12-15T17:15:48.254991+00:00</Value>
+        <Value>2013-12-16T02:51:07.4986585+00:00</Value>
       </Dependency>
       <Request>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\LIMESTO3_0.xnb</Request>
       <Request>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\roof_tiles_0.xnb</Request>
@@ -97,7 +79,7 @@
       <Time>2013-12-10T16:46:50.8390167+00:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Models\CannonBall_0.xml</Key>
-        <Value>2013-12-15T17:15:48.4039995+00:00</Value>
+        <Value>2013-12-16T02:51:07.7706741+00:00</Value>
       </Dependency>
       <Request>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\Seamless marble texture (8)_0.xnb</Request>
     </Item>
@@ -111,7 +93,7 @@
       <Time>2013-12-10T18:33:21.4505388+00:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Models\Water_0.xml</Key>
-        <Value>2013-12-15T17:15:50.8401389+00:00</Value>
+        <Value>2013-12-16T02:51:12.1649254+00:00</Value>
       </Dependency>
       <Request>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\Sea_0.xnb</Request>
     </Item>
@@ -125,7 +107,7 @@
       <Time>2013-12-12T11:45:45.6051248+00:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Models\Dome_0.xml</Key>
-        <Value>2013-12-15T17:15:51.1421561+00:00</Value>
+        <Value>2013-12-16T02:51:12.6379525+00:00</Value>
       </Dependency>
       <Request>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\bluesky_back_0.xnb</Request>
     </Item>
@@ -139,7 +121,7 @@
       <Time>2013-12-12T11:45:45.6071249+00:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Models\Island_0.xml</Key>
-        <Value>2013-12-15T17:15:51.3591685+00:00</Value>
+        <Value>2013-12-16T02:51:13.1299806+00:00</Value>
       </Dependency>
       <Request>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\pedestal_0.xnb</Request>
       <Request>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\grass_0.xnb</Request>
@@ -157,7 +139,7 @@
       <Time>2013-12-13T15:01:39.430857+00:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Models\Arrow_0.xml</Key>
-        <Value>2013-12-15T17:15:52.7672491+00:00</Value>
+        <Value>2013-12-16T02:51:15.6111225+00:00</Value>
       </Dependency>
       <Request>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\feather_0.xnb</Request>
       <Request>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\woodgrain_0.xnb</Request>
@@ -299,15 +281,6 @@
       <Time>2013-12-13T14:52:32.0705498+00:00</Time>
     </Item>
     <Item>
-      <Source>Textures\Star9.png</Source>
-      <Name>Textures\Star9</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Textures\Star9.xnb</Output>
-      <Time>2013-12-15T13:55:44.5914207+00:00</Time>
-    </Item>
-    <Item>
       <Source>Audio\cannonIsland.mp3</Source>
       <Name>Audio\cannonIsland</Name>
       <Importer>Mp3Importer</Importer>
@@ -361,6 +334,15 @@
       <Options>None</Options>
       <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Audio\Manisland.xnb</Output>
       <Time>2013-12-15T15:56:09.0996389+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Fonts\HUD.spritefont</Source>
+      <Name>Fonts\HUD</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Fonts\HUD.xnb</Output>
+      <Time>2013-12-15T17:15:44.3897699+00:00</Time>
     </Item>
     <Item>
       <Source>Models\Pirate Ship.x</Source>

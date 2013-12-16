@@ -104,7 +104,7 @@ namespace GP3_Coursework
            deltaVelocity.Z = -(float)Math.Cos(playerOne.PlayerRotation);
 
             //If the left key is pressed, we add rotation to the player 
-            if (keyboardState.IsKeyDown(Keys.Left)||padState.IsButtonUp(Buttons.RightThumbstickLeft))
+            if (keyboardState.IsKeyDown(Keys.Left)||padState.IsButtonDown(Buttons.RightThumbstickLeft))
             {
                 // Rotate player left 
                 
@@ -114,7 +114,7 @@ namespace GP3_Coursework
 
 
             //As before, however with the right key.
-            if (keyboardState.IsKeyDown(Keys.Right)|padState.IsButtonUp(Buttons.RightThumbstickRight))
+            if (keyboardState.IsKeyDown(Keys.Right)|padState.IsButtonDown(Buttons.RightThumbstickRight))
             {
                 // Rotate player  right.
               
@@ -601,7 +601,8 @@ namespace GP3_Coursework
 
                     //Make the player stationary
                     playerOne.PlayerVelocity = Vector3.Zero;
-
+                    playerOne.PlayerRotation *= 180;
+                    playerOne.PlayerPosition = Vector3.SmoothStep(playerOne.PlayerPosition,new Vector3(0.0f,-5f,0.0f),1f);
                     //set the restart boolean to true- we are restarting. 
                     restart = true;
                 }

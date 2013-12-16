@@ -137,8 +137,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GP3_CourseworkContent\GP3_CourseworkContent.contentproj">
-      <Name>GP3_CourseworkContent</Name>
+      <Name>GP3_CourseworkContent %28Content%29</Name>
       <XnaReferenceType>Content</XnaReferenceType>
+      <Project>{696B6FA3-4073-42AB-BC82-31537B90F952}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

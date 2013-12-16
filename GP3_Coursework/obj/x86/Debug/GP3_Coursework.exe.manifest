@@ -93,38 +93,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="BEPUphysics.dll" size="653824">
-      <assemblyIdentity name="BEPUphysics" version="1.2.0.0" publicKeyToken="31F6A8732A21DE19" language="neutral" processorArchitecture="x86" />
-      <hash>
-        <dsig:Transforms>
-          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-        </dsig:Transforms>
-        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>zfDxzLRRWjWwTJaTdKSIdNtLdEc=</dsig:DigestValue>
-      </hash>
-    </dependentAssembly>
-  </dependency>
-  <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DPSF.dll" size="168448">
-      <assemblyIdentity name="DPSF" version="2.5.0.0" publicKeyToken="32C832BFA7326EE2" language="neutral" processorArchitecture="x86" />
-      <hash>
-        <dsig:Transforms>
-          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-        </dsig:Transforms>
-        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>Ud1tcDiMEfMLKnwdHZy5L3dUlW8=</dsig:DigestValue>
-      </hash>
-    </dependentAssembly>
-  </dependency>
-  <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GP3_Coursework.exe" size="26112">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GP3_Coursework.exe" size="25600">
       <assemblyIdentity name="GP3_Coursework" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>5tghfvOBhW+wa3YDwUxv3mgBCmk=</dsig:DigestValue>
+        <dsig:DigestValue>pW7uHopEF2YOUctD8BF4tUAGGkE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -134,7 +110,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>udvsa9QqMVAyZ9pZWjPd9scIUdM=</dsig:DigestValue>
+      <dsig:DigestValue>0IICkwnePUVCQoAg+qEhr7rIjMw=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Content\Audio\backMusic.xnb" size="127">
@@ -189,15 +165,6 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
       <dsig:DigestValue>8S+7LDdtUtIH6grL9sBQ0WKJRZs=</dsig:DigestValue>
-    </hash>
-  </file>
-  <file name="Content\Fonts\DrWho.xnb" size="21678">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>wcCVx06MNf2mS+OMRxT2QNJyJ08=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Content\Fonts\HUD.xnb" size="21678">
@@ -549,15 +516,6 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
       <dsig:DigestValue>45nk4fRHq510SyMEBBBMv6pi6TE=</dsig:DigestValue>
-    </hash>
-  </file>
-  <file name="Content\Textures\Star9.xnb" size="16571">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>/VoTxWr/5rTEWP84lJJF2o026dc=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Game.ico" size="4286">

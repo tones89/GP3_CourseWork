@@ -19,8 +19,6 @@ C:\Users\Tony\Desktop\GP3_CourseworkWORKING_COPY\GP3_Coursework\GP3_Coursework\o
 C:\Users\Tony\Desktop\GP3_CourseworkWORKING_COPY\GP3_Coursework\GP3_Coursework\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Tony\Desktop\GP3_CourseworkWORKING_COPY\GP3_Coursework\GP3_Coursework\obj\x86\Debug\GP3_Coursework.exe
 C:\Users\Tony\Desktop\GP3_CourseworkWORKING_COPY\GP3_Coursework\GP3_Coursework\obj\x86\Debug\GP3_Coursework.pdb
-G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Fonts\DrWho.xnb
-G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Fonts\HUD.xnb
 G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\Pirate Ship.xnb
 G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\Ball2.xnb
 G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\Castl.xnb
@@ -45,13 +43,13 @@ G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_C
 G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\feather.xnb
 G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\woodgrain.xnb
 G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\metal.xnb
-G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Textures\Star9.xnb
 G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Audio\cannonIsland.xnb
 G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Audio\explosion.xnb
 G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Audio\cannonFire.xnb
 G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Audio\backMusic.xnb
 G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Audio\playerIsland.xnb
 G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Audio\Manisland.xnb
+G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Fonts\HUD.xnb
 G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\Pirate Ship_0.xnb
 G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\WHTCON3_0.xnb
 G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\GRYDIRT1_0.xnb
@@ -71,10 +69,6 @@ G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_C
 G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\GP3_Coursework.application
 G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\GP3_Coursework.exe
 G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\GP3_Coursework.pdb
-G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\BEPUphysics.dll
-G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\DPSF.dll
-G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\BEPUphysics.xml
-G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\DPSF.xml
 G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\obj\x86\Debug\ResolveAssemblyReference.cache
 G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\obj\x86\Debug\GP3_Coursework.exe.manifest
