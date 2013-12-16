@@ -1,5 +1,3 @@
-Content\Fonts\DrWho.xnb
-Content\Fonts\HUD.xnb
 Content\Models\Pirate Ship.xnb
 Content\Models\Ball2.xnb
 Content\Models\Castl.xnb
@@ -24,13 +22,13 @@ Content\Models\Seamless marble texture (8).xnb
 Content\Models\feather.xnb
 Content\Models\woodgrain.xnb
 Content\Models\metal.xnb
-Content\Textures\Star9.xnb
 Content\Audio\cannonIsland.xnb
 Content\Audio\explosion.xnb
 Content\Audio\cannonFire.xnb
 Content\Audio\backMusic.xnb
 Content\Audio\playerIsland.xnb
 Content\Audio\Manisland.xnb
+Content\Fonts\HUD.xnb
 Content\Models\Pirate Ship_0.xnb
 Content\Models\WHTCON3_0.xnb
 Content\Models\GRYDIRT1_0.xnb
