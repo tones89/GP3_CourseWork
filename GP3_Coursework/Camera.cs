@@ -27,22 +27,17 @@ namespace GP3_Coursework
     class Camera
     {
 
-        public CameraMode currentCameraMode = CameraMode.chase; //setting default camera mode to chase camera 
+        public CameraMode cameraType = CameraMode.chase; //setting default camera mode to chase camera 
 
-        public Vector3 position; // the position of the camera in  3d space
-        private Vector3 target; // where the camera is going to look at.
+        public Vector3 actualPosition; // the position of the camera in  3d space
+        private Vector3 lookat; // where the camera is going to look at.
 
         public Matrix viewMatrix, projectionMatrix; // the two crucial matrices for a 3d camera. 
-        //Position matrix is used to determine aspect ratios, field of views and near and far clip planes. 
-        // The View matrix transfroms world to view space ( vertices) to represent where the cam is looking, 
-        //the normal vector and its lookat. 
+        //projection matrix translates 3d to flat imaghe
+        // The View matrix transfroms world to view space 
 
-        private float yaw, pitch, roll;     //these three variables control the angles at which the camera will 
+        private float rotY, rotX, rotZ;     //these three variables control the angles at which the camera will 
         
-        //roll Angle at which we  Rotate around  the z axis
-        //pitch Angle at which we Rotate around  the x axis 
-        //yaw   Angle at which we Rotate around  the y axis
-
         private float speed;   //Speed at which the camera will move
 
         private Matrix cameraRotation;  //The matrix which rotations will be passed to, to make the camera rotate. 
@@ -56,7 +51,7 @@ namespace GP3_Coursework
 
         private Vector3 desiredTarget;
 
-        private Vector3 offsetDistance; // The distance to remain behind the player object, used for 3rd person camera
+        private Vector3 chaseDistance; // The distance to remain behind the player object, used for 3rd person camera
 
         /// <summary>
         /// The default constructor for the camera,
@@ -73,28 +68,26 @@ namespace GP3_Coursework
         /// </summary>
         public void ResetCamera()
         {
-            position = new Vector3(0, 0, 50);   //default position of the camera is 50 on the z axis, when the camera is created ti
+            actualPosition = new Vector3(0, 0, 50);   //default position of the camera is 50 on the z axis, when the camera is created ti
             //will be 50 units from the centre of the world. 
 
-            target = new Vector3();
+            lookat = new Vector3();
             viewMatrix = Matrix.Identity; //This initiates the matrix to a default matrix.
            
             //set The rotation variables to default and set the speed of the camera. 
-            yaw = 0.0f;
-            pitch = 0.0f;
-            roll = 0.0f;
+            rotY = 0.0f;
+            rotX = 0.0f;
+            rotZ = 0.0f;
             speed = .3f;
 
-            //These two vars will be used to ensure that the camera
-            // will move smoothly when trying to keep up with the object.
-
-            //These
-            desiredPosition = position;
+           //set default position to the actual position, set above
+            desiredPosition = actualPosition;
 
 
-            desiredTarget = target;
+            //and the lookat the same, set it to default
+            desiredTarget = lookat;
 
-            offsetDistance = new Vector3(20, 20, 10); // set the distance the camera should be from the object,
+            chaseDistance = new Vector3(10, 10, 10); // set the distance the camera should be from the object,
            // offsetDistance = new Vector3(-10, 2, 0); // set the distance the camera should be from the object,
             // used for 3rd person camera
 
@@ -110,12 +103,12 @@ namespace GP3_Coursework
         {
             ResetCamera();  //First Reset the camera.
 
-            currentCameraMode++;    //Use the integer from the enum, and simply increase by one. hence we are 
+            cameraType++;    //Use the integer from the enum, and simply increase by one. hence we are 
             //switching between them sequentially
 
-            if ((int)currentCameraMode > 1) //if it is greater than 2 ( the last number in enum) set back to 0 the first,
+            if ((int)cameraType > 1) //if it is greater than 2 ( the last number in enum) set back to 0 the first,
             {
-                currentCameraMode = 0;
+                cameraType = 0;
             }
         }
 
@@ -124,11 +117,11 @@ namespace GP3_Coursework
         /// It handles the user input to move the camera, and also manages the cameras view matrix
         /// to ensure it keeps up to date with its movement.
         /// </summary>
-        /// <param name="chaseObjectsWorld"> The object that we want to follow's world matrix,</param>
-        public void Update(Matrix chaseObjectsWorld)
+        /// <param name="playerTransform"> The object that we want to follow's world matrix,</param>
+        public void Update(Matrix playerTransform)
         { 
             HandleInput();
-            UpdateViewMatrix(chaseObjectsWorld); //pass the view matrix the objects world matrix to allow tracking.
+            SetupViewMatrix(playerTransform); //pass the view matrix the objects world matrix to allow tracking.
         }
 
 
@@ -139,12 +132,12 @@ namespace GP3_Coursework
         /// the target position and rotation vars are manipulated and changed; and these variables are then passed
         /// to the view matrix calculation which will change the camera accordingly.
         /// </summary>
-        /// <param name="chasedObjectsWorld"> Used for the third person camera, this ius the world matrix of the world
+        /// <param name="playerTransform"> Used for the third person camera, this ius the world matrix of the world
         /// we wish to follow.</param>
-        private void UpdateViewMatrix(Matrix chasedObjectsWorld)
+        private void SetupViewMatrix(Matrix playerTransform)
         {
             //The switch case which switches between the types of cameras.
-            switch (currentCameraMode)
+            switch (cameraType)
             {
                 #region FreeCam Mode
                 case CameraMode.free:
@@ -161,59 +154,59 @@ namespace GP3_Coursework
 
                 //Allowing the camera to rotate. We rotate the matric around itself
                 // To ensure that it rotates correctly, regardless of prevoius rotation.
-                cameraRotation *= Matrix.CreateFromAxisAngle(cameraRotation.Right, pitch);  //This will rotate around the x axis
+                cameraRotation *= Matrix.CreateFromAxisAngle(cameraRotation.Right, rotX);  //This will rotate around the x axis
 
-                cameraRotation *= Matrix.CreateFromAxisAngle(cameraRotation.Up, yaw);   // This will rotate around the y axis 
+                cameraRotation *= Matrix.CreateFromAxisAngle(cameraRotation.Up, rotY);   // This will rotate around the y axis 
 
-                cameraRotation *= Matrix.CreateFromAxisAngle(cameraRotation.Forward, roll); //this will rotate around the z axis
+                cameraRotation *= Matrix.CreateFromAxisAngle(cameraRotation.Forward, rotZ); //this will rotate around the z axis
 
-                yaw = 0.0f;
-                pitch = 0.0f;
-                roll = 0.0f;
+                rotY = 0.0f;
+                rotX = 0.0f;
+                rotZ = 0.0f;
 
                 // Update the cameras lookat to keep it next to the camera and
                 //to keep it facing forward when rotating. And also ensure the
                     //camera faces forard regardless of how it is rotated.
-                target = position + cameraRotation.Forward;
+                lookat = actualPosition + cameraRotation.Forward;
 
                 break;
                 #endregion
                 case CameraMode.chase:
                     
                     cameraRotation.Forward.Normalize();
-                    chasedObjectsWorld.Right.Normalize();
-                    chasedObjectsWorld.Up.Normalize();
+                    playerTransform.Right.Normalize();
+                    playerTransform.Up.Normalize();
  
-                    cameraRotation = Matrix.CreateFromAxisAngle(cameraRotation.Forward, roll);
+                    cameraRotation = Matrix.CreateFromAxisAngle(cameraRotation.Forward, rotZ);
 
                     //set the desired target to the object we are chasings position/
-                    desiredTarget = chasedObjectsWorld.Translation;
-
+                    desiredTarget = playerTransform.Translation;
+   
                     //Set actual target pos to be the desired target pos and use pitch and and yaw to ensure
                     //that smooth transitioning occurs throughout
-                    target = desiredTarget;
-                    target += chasedObjectsWorld.Right * yaw;
-                    target += chasedObjectsWorld.Up * 0.5f;
+                    lookat = desiredTarget;
+                    lookat += playerTransform.Right * rotY;
+                    lookat += playerTransform.Up * 0.5f;
 
                     //set the desired position of the camera, could  just be the 
                     //offest vector. But to take rotation of chase object into account, we
                     //must transfom the camera to the world matrix and offset distance 
-                    desiredPosition = Vector3.Transform(offsetDistance, chasedObjectsWorld);
+                    desiredPosition = Vector3.Transform(chaseDistance, playerTransform);
 
                     // The smoothstep functions ensure that the camera moves and rotates
                     // smoothly to its necissary position. 
                     //It also sets the cameras rotation back to zero
-                    position = Vector3.SmoothStep(position, desiredPosition, .15f);
+                    actualPosition = Vector3.SmoothStep(actualPosition, desiredPosition, .15f);
 
-                    yaw = MathHelper.SmoothStep(yaw, 0f, .1f);
-                    pitch = MathHelper.SmoothStep(pitch, 0f, .1f);
-                    roll = MathHelper.SmoothStep(roll, 0f, .2f);
+                    rotY = MathHelper.SmoothStep(rotY, 0f, .1f);
+                    rotX = MathHelper.SmoothStep(rotX, 0f, .1f);
+                    rotZ = MathHelper.SmoothStep(rotZ, 0f, .2f);
                     break;
 
                 
             }
 
-            viewMatrix = Matrix.CreateLookAt(position, target, cameraRotation.Up);
+            viewMatrix = Matrix.CreateLookAt(actualPosition, lookat, cameraRotation.Up);
 
 
            
@@ -222,10 +215,10 @@ namespace GP3_Coursework
         /// <summary>
         /// Translate the camera to the given coordinates at the given speed
         /// </summary>
-        /// <param name="addedVector">The position which to move the camera to. </param>
-        private void MoveCamera(Vector3 addedVector)
+        /// <param name="delta">The position which to move the camera to. </param>
+        private void MoveCamera(Vector3 delta)
         {
-            position += speed * addedVector;
+            actualPosition += speed * delta;
         }
 
 
@@ -237,62 +230,62 @@ namespace GP3_Coursework
         private void HandleInput()
         {
             KeyboardState keyboardState = Keyboard.GetState();
-
+            GamePadState padState = GamePad.GetState(PlayerIndex.One);
             //We can Rotate the camera ( roll pitch and yaw) it
             //throughout any of the camera modes.
-            if (keyboardState.IsKeyDown(Keys.J))
+            if (keyboardState.IsKeyDown(Keys.J)||padState.IsButtonDown(Buttons.LeftThumbstickRight))
             {
-                yaw += .02f;
+                rotY += .02f;
             }
-            if (keyboardState.IsKeyDown(Keys.L))
+            if (keyboardState.IsKeyDown(Keys.L)||padState.IsButtonDown(Buttons.LeftThumbstickLeft))
             {
-                yaw += -.02f;
+                rotY += -.02f;
             }
-            if (keyboardState.IsKeyDown(Keys.I))
+            if (keyboardState.IsKeyDown(Keys.I)||padState.IsButtonDown(Buttons.LeftThumbstickUp))
             {
-                pitch += -.06f;
+                rotX += -.06f;
             }
-            if (keyboardState.IsKeyDown(Keys.K))
+            if (keyboardState.IsKeyDown(Keys.K)||padState.IsButtonDown(Buttons.LeftThumbstickDown))
             {
-                pitch += .06f;
+                rotX += .06f;
             }
             if (keyboardState.IsKeyDown(Keys.U))
             {
-                roll += -.02f;
+                rotZ += -.02f;
             }
             if (keyboardState.IsKeyDown(Keys.O))
             {
-                roll += .02f;
+                rotZ += .02f;
             }
 
 
             //only allow the camera to be freely moved when the 
             //camera mode is free. 
-            if (currentCameraMode == CameraMode.free)
+            if (cameraType == CameraMode.free)
             {
-             
+                GamePadState padStat2  = new GamePadState();
                 //Camera’s Movement code
-                if (keyboardState.IsKeyDown(Keys.W))
+                if (keyboardState.IsKeyDown(Keys.W)||padStat2.IsButtonDown(Buttons.RightThumbstickUp))
                 {
                     MoveCamera(cameraRotation.Forward);
                 }
-                if (keyboardState.IsKeyDown(Keys.S))
+                if (keyboardState.IsKeyDown(Keys.S)||padStat2.IsButtonDown(Buttons.RightThumbstickDown))
                 {
                     MoveCamera(-cameraRotation.Forward);
                 }
-                if (keyboardState.IsKeyDown(Keys.A))
+                if (keyboardState.IsKeyDown(Keys.A)||padStat2.IsButtonDown(Buttons.RightThumbstickRight))
                 {
                     MoveCamera(-cameraRotation.Right);
                 }
-                if (keyboardState.IsKeyDown(Keys.D))
+                if (keyboardState.IsKeyDown(Keys.D)||padStat2.IsButtonDown(Buttons.RightThumbstickLeft))
                 {
                     MoveCamera(cameraRotation.Right);
                 }
-                if (keyboardState.IsKeyDown(Keys.E))
+                if (keyboardState.IsKeyDown(Keys.E)||padStat2.IsButtonDown(Buttons.LeftShoulder))
                 {
                     MoveCamera(cameraRotation.Up);
                 }
-                if (keyboardState.IsKeyDown(Keys.Q))
+                if (keyboardState.IsKeyDown(Keys.Q)||padStat2.IsButtonDown(Buttons.RightShoulder))
                 {
                     MoveCamera(-cameraRotation.Up);
                 }

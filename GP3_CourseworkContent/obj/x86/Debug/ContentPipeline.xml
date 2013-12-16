@@ -1,0 +1,694 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline" xmlns:Framework="Microsoft.Xna.Framework" xmlns:Processors="Microsoft.Xna.Framework.Content.Pipeline.Processors">
+  <Asset Type="Pipeline:BuildItemCollection">
+    <Item>
+      <Source>Fonts\DrWho.spritefont</Source>
+      <Name>Fonts\DrWho</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Fonts\DrWho.xnb</Output>
+      <Time>2013-11-06T19:53:39.7729967+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Fonts\HUD.spritefont</Source>
+      <Name>Fonts\HUD</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Fonts\HUD.xnb</Output>
+      <Time>2013-12-15T17:15:44.3897699+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\Pirate Ship.x</Source>
+      <Name>Models\Pirate Ship</Name>
+      <Importer>XImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Parameters>
+        <Data Key="Scale">2</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\Pirate Ship.xnb</Output>
+      <Time>2009-06-14T20:30:21.674+01:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Models\Pirate Ship_0.xml</Key>
+        <Value>2013-12-15T17:15:45.6708432+00:00</Value>
+      </Dependency>
+      <Request>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\Pirate Ship_0.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Models\Ball2.X</Source>
+      <Name>Models\Ball2</Name>
+      <Importer>XImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\Ball2.xnb</Output>
+      <Time>2013-11-27T18:13:26.7300362+00:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Models\Ball2_0.xml</Key>
+        <Value>2013-12-15T17:15:46.8539109+00:00</Value>
+      </Dependency>
+    </Item>
+    <Item>
+      <Source>Models\Castl.X</Source>
+      <Name>Models\Castl</Name>
+      <Importer>XImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Parameters>
+        <Data Key="Scale">2</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\Castl.xnb</Output>
+      <Time>2013-12-10T13:34:18.1892429+00:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Models\Castl_0.xml</Key>
+        <Value>2013-12-15T17:15:47.2009307+00:00</Value>
+      </Dependency>
+      <Request>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\WHTCON3_0.xnb</Request>
+      <Request>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\GRYDIRT1_0.xnb</Request>
+      <Request>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\LIMESTO3_0.xnb</Request>
+      <Request>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\Weathered Wood 3-512_0.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Models\castleTower.X</Source>
+      <Name>Models\castleTower</Name>
+      <Importer>XImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Parameters>
+        <Data Key="Scale">2</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\castleTower.xnb</Output>
+      <Time>2013-12-10T14:10:46.2093905+00:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Models\castleTower_0.xml</Key>
+        <Value>2013-12-15T17:15:48.254991+00:00</Value>
+      </Dependency>
+      <Request>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\LIMESTO3_0.xnb</Request>
+      <Request>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\roof_tiles_0.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Models\CannonBall.X</Source>
+      <Name>Models\CannonBall</Name>
+      <Importer>XImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\CannonBall.xnb</Output>
+      <Time>2013-12-10T16:46:50.8390167+00:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Models\CannonBall_0.xml</Key>
+        <Value>2013-12-15T17:15:48.4039995+00:00</Value>
+      </Dependency>
+      <Request>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\Seamless marble texture (8)_0.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Models\Water.X</Source>
+      <Name>Models\Water</Name>
+      <Importer>XImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\Water.xnb</Output>
+      <Time>2013-12-10T18:33:21.4505388+00:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Models\Water_0.xml</Key>
+        <Value>2013-12-15T17:15:50.8401389+00:00</Value>
+      </Dependency>
+      <Request>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\Sea_0.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Models\Dome.X</Source>
+      <Name>Models\Dome</Name>
+      <Importer>XImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\Dome.xnb</Output>
+      <Time>2013-12-12T11:45:45.6051248+00:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Models\Dome_0.xml</Key>
+        <Value>2013-12-15T17:15:51.1421561+00:00</Value>
+      </Dependency>
+      <Request>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\bluesky_back_0.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Models\Island.X</Source>
+      <Name>Models\Island</Name>
+      <Importer>XImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\Island.xnb</Output>
+      <Time>2013-12-12T11:45:45.6071249+00:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Models\Island_0.xml</Key>
+        <Value>2013-12-15T17:15:51.3591685+00:00</Value>
+      </Dependency>
+      <Request>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\pedestal_0.xnb</Request>
+      <Request>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\grass_0.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Models\Arrow.X</Source>
+      <Name>Models\Arrow</Name>
+      <Importer>XImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Parameters>
+        <Data Key="Scale">5</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\Arrow.xnb</Output>
+      <Time>2013-12-13T15:01:39.430857+00:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Models\Arrow_0.xml</Key>
+        <Value>2013-12-15T17:15:52.7672491+00:00</Value>
+      </Dependency>
+      <Request>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\feather_0.xnb</Request>
+      <Request>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\woodgrain_0.xnb</Request>
+      <Request>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\metal_0.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Models\ColorTex.bmp</Source>
+      <Name>Models\ColorTex</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\ColorTex.xnb</Output>
+      <Time>2013-12-09T18:59:40.8167603+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\bluesky_back.tga</Source>
+      <Name>Models\bluesky_back</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\bluesky_back.xnb</Output>
+      <Time>2013-12-10T14:10:46.20039+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\grass.tga</Source>
+      <Name>Models\grass</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\grass.xnb</Output>
+      <Time>2013-12-10T14:10:46.287395+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\pedestal.tga</Source>
+      <Name>Models\pedestal</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\pedestal.xnb</Output>
+      <Time>2013-12-10T14:10:46.4054017+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\Sea.tga</Source>
+      <Name>Models\Sea</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\Sea.xnb</Output>
+      <Time>2013-12-10T14:10:46.4694054+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\brick_6.tga</Source>
+      <Name>Models\brick_6</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\brick_6.xnb</Output>
+      <Time>2013-12-10T14:10:46.2033902+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\GRYDIRT1.tga</Source>
+      <Name>Models\GRYDIRT1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\GRYDIRT1.xnb</Output>
+      <Time>2013-12-10T14:10:46.2913952+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\LIMESTO3.tga</Source>
+      <Name>Models\LIMESTO3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\LIMESTO3.xnb</Output>
+      <Time>2013-12-10T14:10:46.3313975+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\Weathered Wood 3-512.tga</Source>
+      <Name>Models\Weathered Wood 3-512</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\Weathered Wood 3-512.xnb</Output>
+      <Time>2013-12-13T14:41:23.5943151+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\WHTCON3.tga</Source>
+      <Name>Models\WHTCON3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\WHTCON3.xnb</Output>
+      <Time>2013-12-10T14:10:46.4774059+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\roof_tiles.tga</Source>
+      <Name>Models\roof_tiles</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\roof_tiles.xnb</Output>
+      <Time>2013-12-10T14:10:46.4074019+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\Seamless marble texture (8).tga</Source>
+      <Name>Models\Seamless marble texture (8)</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\Seamless marble texture (8).xnb</Output>
+      <Time>2013-12-10T16:46:50.9190213+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\feather.tga</Source>
+      <Name>Models\feather</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\feather.xnb</Output>
+      <Time>2013-12-13T14:41:21.0841715+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\woodgrain.tga</Source>
+      <Name>Models\woodgrain</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\woodgrain.xnb</Output>
+      <Time>2013-12-13T14:41:23.6133162+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\metal.tga</Source>
+      <Name>Models\metal</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\metal.xnb</Output>
+      <Time>2013-12-13T14:52:32.0705498+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Star9.png</Source>
+      <Name>Textures\Star9</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Textures\Star9.xnb</Output>
+      <Time>2013-12-15T13:55:44.5914207+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Audio\cannonIsland.mp3</Source>
+      <Name>Audio\cannonIsland</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Audio\cannonIsland.xnb</Output>
+      <Time>2013-12-13T17:49:09.0036597+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Audio\explosion.mp3</Source>
+      <Name>Audio\explosion</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Audio\explosion.xnb</Output>
+      <Time>2013-12-13T17:48:42.7041554+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Audio\cannonFire.mp3</Source>
+      <Name>Audio\cannonFire</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Audio\cannonFire.xnb</Output>
+      <Time>2013-12-13T17:42:19.1132153+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Audio\backMusic.mp3</Source>
+      <Name>Audio\backMusic</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Audio\backMusic.xnb</Output>
+      <Extra>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Audio\backMusic.wma</Extra>
+      <Time>2013-12-13T17:57:06.7529854+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Audio\playerIsland.mp3</Source>
+      <Name>Audio\playerIsland</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Audio\playerIsland.xnb</Output>
+      <Time>2013-12-13T17:51:40.574329+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Audio\Manisland.mp3</Source>
+      <Name>Audio\Manisland</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Audio\Manisland.xnb</Output>
+      <Time>2013-12-15T15:56:09.0996389+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\Pirate Ship.x</Source>
+      <Importer>XImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Models\Pirate Ship_0.xml</Output>
+      <Time>2009-06-14T20:30:21.674+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\Pirate Ship.png</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\Pirate Ship_0.xnb</Output>
+      <Time>2009-06-14T20:29:41.014+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\Ball2.X</Source>
+      <Importer>XImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Models\Ball2_0.xml</Output>
+      <Time>2013-11-27T18:13:26.7300362+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\Castl.X</Source>
+      <Importer>XImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Models\Castl_0.xml</Output>
+      <Time>2013-12-10T13:34:18.1892429+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\WHTCON3.tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\WHTCON3_0.xnb</Output>
+      <Time>2013-12-10T14:10:46.4774059+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\GRYDIRT1.tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\GRYDIRT1_0.xnb</Output>
+      <Time>2013-12-10T14:10:46.2913952+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\LIMESTO3.tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\LIMESTO3_0.xnb</Output>
+      <Time>2013-12-10T14:10:46.3313975+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\Weathered Wood 3-512.tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\Weathered Wood 3-512_0.xnb</Output>
+      <Time>2013-12-13T14:41:23.5943151+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\castleTower.X</Source>
+      <Importer>XImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Models\castleTower_0.xml</Output>
+      <Time>2013-12-10T14:10:46.2093905+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\roof_tiles.tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\roof_tiles_0.xnb</Output>
+      <Time>2013-12-10T14:10:46.4074019+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\CannonBall.X</Source>
+      <Importer>XImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Models\CannonBall_0.xml</Output>
+      <Time>2013-12-10T16:46:50.8390167+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\Seamless marble texture (8).tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\Seamless marble texture (8)_0.xnb</Output>
+      <Time>2013-12-10T16:46:50.9190213+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\Water.X</Source>
+      <Importer>XImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Models\Water_0.xml</Output>
+      <Time>2013-12-10T18:33:21.4505388+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\Sea.tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\Sea_0.xnb</Output>
+      <Time>2013-12-10T14:10:46.4694054+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\Dome.X</Source>
+      <Importer>XImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Models\Dome_0.xml</Output>
+      <Time>2013-12-12T11:45:45.6051248+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\bluesky_back.tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\bluesky_back_0.xnb</Output>
+      <Time>2013-12-10T14:10:46.20039+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\Island.X</Source>
+      <Importer>XImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Models\Island_0.xml</Output>
+      <Time>2013-12-12T11:45:45.6071249+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\pedestal.tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\pedestal_0.xnb</Output>
+      <Time>2013-12-10T14:10:46.4054017+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\grass.tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\grass_0.xnb</Output>
+      <Time>2013-12-10T14:10:46.287395+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\Arrow.X</Source>
+      <Importer>XImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Models\Arrow_0.xml</Output>
+      <Time>2013-12-13T15:01:39.430857+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\feather.tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\feather_0.xnb</Output>
+      <Time>2013-12-13T14:41:21.0841715+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\woodgrain.tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\woodgrain_0.xnb</Output>
+      <Time>2013-12-13T14:41:23.6133162+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\metal.tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\Models\metal_0.xnb</Output>
+      <Time>2013-12-13T14:52:32.0705498+00:00</Time>
+    </Item>
+    <BuildSuccessful>true</BuildSuccessful>
+    <Settings>
+      <TargetPlatform>Windows</TargetPlatform>
+      <TargetProfile>Reach</TargetProfile>
+      <BuildConfiguration>Debug</BuildConfiguration>
+      <CompressContent>false</CompressContent>
+      <RootDirectory>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_CourseworkContent\</RootDirectory>
+      <LoggerRootDirectory>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\</LoggerRootDirectory>
+      <IntermediateDirectory>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_CourseworkContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>G:\---UNI---\---SEMESTER1---\Games Programming 3\Coursework\GP3_Coursework\GP3_Coursework\GP3_Coursework\bin\x86\Debug\Content\</OutputDirectory>
+    </Settings>
+    <Assemblies>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
+        <Value>2010-08-23T13:41:18+01:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
+        <Value>2010-08-23T13:41:18+01:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
+        <Value>2010-08-23T13:41:18+01:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
+        <Value>2010-08-23T13:41:18+01:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
+        <Value>2010-08-23T13:41:18+01:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
+        <Value>2010-08-23T13:41:18+01:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2011-03-21T09:53:36.8199031+00:00</Value>
+      </Assembly>
+    </Assemblies>
+  </Asset>
+</XnaContent>

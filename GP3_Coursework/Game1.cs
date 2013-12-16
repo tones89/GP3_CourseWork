@@ -82,8 +82,8 @@ namespace GP3_Coursework
         //an instance of the player, we give them a default health of 100;
         Player playerOne = new Player(100);
         KeyboardState oldKeyState = Keyboard.GetState();
-      
-  
+        GamePadState oldPadState = GamePad.GetState(PlayerIndex.One);  
+    
         /// <summary>
         /// This method takes input from the keyboard and
         /// performs a variety of tasks which will
@@ -93,7 +93,9 @@ namespace GP3_Coursework
         {
 
             KeyboardState keyboardState = Keyboard.GetState();
-            
+            GamePadState padState = GamePad.GetState(PlayerIndex.One, GamePadDeadZone.Circular);
+        
+
             //delta is the velocity each frame to be applied to the player
             Vector3 deltaVelocity = Vector3.Zero;
 
@@ -102,7 +104,7 @@ namespace GP3_Coursework
            deltaVelocity.Z = -(float)Math.Cos(playerOne.PlayerRotation);
 
             //If the left key is pressed, we add rotation to the player 
-            if (keyboardState.IsKeyDown(Keys.Left))
+            if (keyboardState.IsKeyDown(Keys.Left)||padState.IsButtonUp(Buttons.RightThumbstickLeft))
             {
                 // Rotate player left 
                 
@@ -112,7 +114,7 @@ namespace GP3_Coursework
 
 
             //As before, however with the right key.
-            if (keyboardState.IsKeyDown(Keys.Right))
+            if (keyboardState.IsKeyDown(Keys.Right)|padState.IsButtonUp(Buttons.RightThumbstickRight))
             {
                 // Rotate player  right.
               
@@ -121,7 +123,7 @@ namespace GP3_Coursework
 
             //Used to move the player forward.
 
-            if (keyboardState.IsKeyDown(Keys.Up))
+            if (keyboardState.IsKeyDown(Keys.Up)||padState.IsButtonDown(Buttons.LeftThumbstickUp))
             {
                //Determine the deltaVelocity, bd add tihs to the players velocity, 
                 //thus generating movement
@@ -132,7 +134,7 @@ namespace GP3_Coursework
              
             }
 
-            if (keyboardState.IsKeyDown(Keys.Down))
+            if (keyboardState.IsKeyDown(Keys.Down)||padState.IsButtonDown(Buttons.LeftThumbstickDown))
             {
                //as before but this time, backwwards.
                 deltaVelocity *= -0.05f;
@@ -140,7 +142,7 @@ namespace GP3_Coursework
             }
 
             //This function allows the player to fire using the left control key.
-            if (keyboardState.IsKeyDown(Keys.LeftControl) && oldKeyState.IsKeyUp(Keys.LeftControl))
+            if (keyboardState.IsKeyDown(Keys.LeftControl) && oldKeyState.IsKeyUp(Keys.LeftControl) || padState.IsButtonDown(Buttons.RightTrigger)&&(oldPadState.IsButtonUp(Buttons.RightTrigger)))
             {
 
                 //firstly we cycle over the amount of ammuniton(or cannonballs held
@@ -175,20 +177,20 @@ namespace GP3_Coursework
 
             //allow the user to exit the application  using the escape key
 
-            if (keyboardState.IsKeyDown(Keys.Escape) && oldKeyState.IsKeyUp(Keys.Escape))
+            if (keyboardState.IsKeyDown(Keys.Escape) && oldKeyState.IsKeyUp(Keys.Escape)||padState.IsButtonDown(Buttons.Start)&&oldPadState.IsButtonUp(Buttons.Start))
             {
                 this.Exit();
             }
 
             // if the user hits the delete key, we allow them to restart the game
-            if (keyboardState.IsKeyDown(Keys.Delete) && oldKeyState.IsKeyUp(Keys.Delete))
+            if (keyboardState.IsKeyDown(Keys.Delete) && oldKeyState.IsKeyUp(Keys.Delete)||padState.IsButtonDown(Buttons.B)&&oldPadState.IsButtonUp(Buttons.B))
             {
                 //we set restart to true.
                 restart = true;
             }
 
             //This is the key to confirm the user wishes to restar or quit...
-            if (keyboardState.IsKeyDown(Keys.Y) && oldKeyState.IsKeyUp(Keys.Y))
+            if (keyboardState.IsKeyDown(Keys.Y) && oldKeyState.IsKeyUp(Keys.Y)||padState.IsButtonDown(Buttons.A)&&oldPadState.IsButtonUp(Buttons.A))
             {
 
                 //if we are restarting, we must reset the variables to their defaults.
@@ -215,7 +217,7 @@ namespace GP3_Coursework
                 }
             }
           
-            if (keyboardState.IsKeyDown(Keys.Tab) && oldKeyState.IsKeyUp(Keys.Tab))
+            if (keyboardState.IsKeyDown(Keys.Tab) && oldKeyState.IsKeyUp(Keys.Tab)||padState.IsButtonDown(Buttons.LeftThumbstickDown)&&oldPadState.IsButtonUp(Buttons.LeftThumbstickDown))
             {
                 mainCamera.SwitchCameraMode();
             }
@@ -228,14 +230,14 @@ namespace GP3_Coursework
 */
 
             //The following key is used to start the music
-            if (keyboardState.IsKeyDown(Keys.N) && oldKeyState.IsKeyUp(Keys.N))
+            if (keyboardState.IsKeyDown(Keys.N) && oldKeyState.IsKeyUp(Keys.N)||padState.IsButtonDown(Buttons.DPadUp)&&oldPadState.IsButtonUp(Buttons.DPadUp))
             {
                 playingSong = true;
                 
             }
 
             //This key is the key used to stop the music
-            if (keyboardState.IsKeyDown(Keys.M) && oldKeyState.IsKeyUp(Keys.M))
+            if (keyboardState.IsKeyDown(Keys.M) && oldKeyState.IsKeyUp(Keys.M)||padState.IsButtonDown(Buttons.DPadDown)&&oldPadState.IsButtonUp(Buttons.DPadDown))
             {
 
                 playingSong = false;
@@ -244,6 +246,7 @@ namespace GP3_Coursework
 
             //maintain an instance of the last key pressed, to test if the user has pressed , and relased a key 
             oldKeyState = keyboardState;
+            oldPadState = padState;
         }
 
     
@@ -259,7 +262,7 @@ namespace GP3_Coursework
         /// <returns>It will return  transformation matrix  array which keeps track of all  the bones in the mesh
         /// to allow movement and positioning of each model. </returns>
   
-        private Matrix[] SetupEffectTransformDefaults(Model myModel)
+        private Matrix[] GetDefaultTransforms(Model myModel)
         {
             Matrix[] absoluteTransforms = new Matrix[myModel.Bones.Count];
             myModel.CopyAbsoluteBoneTransformsTo(absoluteTransforms);
@@ -388,33 +391,42 @@ namespace GP3_Coursework
 
             spriteBatch = new SpriteBatch(GraphicsDevice);
             oldKeyState = Keyboard.GetState() ;
-            
+
+
+            //==================================================
+            //==================Model Content====================
+            //==================================================
+            //==================================================
 
             // This is where we load each model, and assign their
             //transform matrix []'s
             mdlPlayer = Content.Load<Model>(".\\Models\\Pirate Ship");
             playerOne.PlayerModel = mdlPlayer;
-            playerOne.Transforms = SetupEffectTransformDefaults(playerOne.PlayerModel);
+            playerOne.Transforms = GetDefaultTransforms(playerOne.PlayerModel);
             mdl_OuterDome = Content.Load<Model>(".\\Models\\Dome"); //the skyDome
-                mdlOuterDomeTrans = SetupEffectTransformDefaults(mdl_OuterDome);
+                mdlOuterDomeTrans = GetDefaultTransforms(mdl_OuterDome);
             mdl_Water = Content.Load<Model>(".\\Models\\Water");    //The water
-                mdlWaterTrans = SetupEffectTransformDefaults(mdl_Water);
+                mdlWaterTrans = GetDefaultTransforms(mdl_Water);
             mdl_Island = Content.Load<Model>(".\\Models\\Island");  //The central island
-                mdlIslandTransform = SetupEffectTransformDefaults(mdl_Island);
+                mdlIslandTransform = GetDefaultTransforms(mdl_Island);
             mdl_Tower = Content.Load<Model>(".\\Models\\castleTower");    // The Tower
-                mdlTowerTrans = SetupEffectTransformDefaults(mdl_Tower);    
+                mdlTowerTrans = GetDefaultTransforms(mdl_Tower);    
             mdl_Castle = Content.Load<Model>(".\\Models\\Castl");   //The castle
-                mdlCastleTrans = SetupEffectTransformDefaults(mdl_Castle);
+                mdlCastleTrans = GetDefaultTransforms(mdl_Castle);
             mdl_CannonBall = Content.Load<Model>(".\\Models\\CannonBall");  //The cannonball
-                mdlCannonBallTrans = SetupEffectTransformDefaults(mdl_CannonBall);
+                mdlCannonBallTrans = GetDefaultTransforms(mdl_CannonBall);
             mdl_Arrow = Content.Load<Model>(".\\Models\\Arrow");    
-                mdlArrowTrans = SetupEffectTransformDefaults(mdl_Arrow);
+                mdlArrowTrans = GetDefaultTransforms(mdl_Arrow);
             
             //==================================================
             //==================Font Content====================
 
-            aFont = Content.Load<SpriteFont>(".\\Fonts\\HUD");  
+            aFont = Content.Load<SpriteFont>(".\\Fonts\\HUD");
 
+
+            //==================================================
+            //==================Audio Content===================
+            //==================================================
             SoundEffect islandcollision = Content.Load<SoundEffect>(".\\Audio\\Manisland");
                 audio.AddSoundEffect("manIsland", islandcollision);
 
@@ -426,11 +438,19 @@ namespace GP3_Coursework
 
             SoundEffect cannonTower = Content.Load<SoundEffect>(".\\Audio\\explosion");
                 audio.AddSoundEffect("cannonTower", cannonTower);
+           
 
             Song background = Content.Load<Song>(".\\Audio\\backMusic");
                 MediaPlayer.Play(background);
                 playingSong = true;
 
+
+            //==================================================
+            //==================Scenery Content=================
+            //==================================================
+
+
+            //we must set the towers and castles to active on start, otherwise they wont be drawn.
             for (int i = 0; i < 1; i++)
                 {
                     if (!towerArray[i].isActive)
@@ -470,20 +490,28 @@ namespace GP3_Coursework
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
          
-         //   Matrix modelTransform = makeTransform(mdlRotation, mdlPosition);
-            //mainCamera.Update(modelTransform);
+            //an instance of the player position and rotation matrix, to allow camera to follow layer
            Matrix transform =  playerOne.Transformation = makeTransform(playerOne.PlayerRotation, playerOne.PlayerPosition);
-           mainCamera.Update(transform);
+          
+            //update the main camera, passing the player's transformation to allow correct following procedures
+            mainCamera.Update(transform);
+          
+            //A call to handle the input each frame
             HandleInput();
+
+            //Used to manage collisions each frame. 
             ManageCollisions();
 
 
+            //update cannonballs if they are active
             float timeDelta = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             for (int i = 0; i < 3; i++)
             {
                 cannonballs[i].Update(timeDelta);
             }
+
+            //instantiate positions and rotations for the towers and castles
             for (int i = 0; i < 1; i++)
             {
                 towerArray[i].towerPosition = new Vector3(30f, 1f, 30f);
@@ -497,6 +525,11 @@ namespace GP3_Coursework
                     castles[c].rotation = 600;
                 }
 
+
+            //these variables manage the background music
+            //we make a call to the media player to resume 
+            //if the boolean to  play is true
+            //and to pause the song if it is false.
                 if (playingSong == true)
                 {
                     MediaPlayer.Resume();
@@ -507,25 +540,31 @@ namespace GP3_Coursework
                     MediaPlayer.Pause();
                 }
 
-
-                // Add velocity to the current position.
-                //mdlPosition += mdlVelocity;
-
+                //update the players velocity each frame
                 playerOne.PlayerPosition += playerOne.PlayerVelocity;
+
+            //in doing so, we need to "temper" the velocity to prevent the 
+            // model conitually moving
                 playerOne.PlayerVelocity *= 0.95f;
-                // Bleed off velocity over time.
-             //   mdlVelocity *= 0.95f;
+        
                 base.Update(gameTime);
             
         }
 
+
+        /// <summary>
+        /// This method manages all the collisions that occur throughout the game
+        /// </summary>
         void ManageCollisions()
         {
 
+
+            //Create bounding volumes for each of the objects in the world. 
+            //we use the default mesh spehere of the object, an multiply it to 
+            //reduce its size to avoid false positive collision. 
             BoundingSphere boatSphere = new BoundingSphere(
                 playerOne.PlayerPosition, playerOne.PlayerModel.Meshes[0].BoundingSphere.Radius * 0.025f);
-            //BoundingSphere boatSphere = new BoundingSphere(
-              //  mdlPosition, mdlPlayer.Meshes[0].BoundingSphere.Radius * 0.025f);
+            
 
             BoundingSphere islandSphere = new BoundingSphere(
                 islandPos, mdl_Island.Meshes[0].BoundingSphere.Radius * 1.7f);
@@ -534,47 +573,62 @@ namespace GP3_Coursework
                 domePos, mdl_OuterDome.Meshes[0].BoundingSphere.Radius * 0.5f);
             BoundingSphere towerSphere;
 
+
+            //These statements determine whether two objects's spheres have intersected. 
+
+            //If player hits the island
             if (boatSphere.Intersects(islandSphere))
             {
+                //play sound to alert player they've hit an object
                 audio.PlaySoundEffect("manIsland");
+                
+                //deduct Hit points 
                 playerOne.PlayerHealth -= 10;
+                //this command reverses the players current velocity, this making forward thrust backward thrust.
                 playerOne.PlayerVelocity = Vector3.Negate(playerOne.PlayerVelocity);
+
+                //and then add this velocity to their poition, thus pushing the player backwards
                 playerOne.PlayerPosition += playerOne.PlayerVelocity/2;
+                
+                //AS we have implemented Health to the player, We must do something when this health drops bellow 0
                 if (playerOne.PlayerHealth<=0)
                 {
+                    //set the health to 0, to prevent it contiuing to count down
                     playerOne.PlayerHealth = 0;
-                    audio.StopSoundEffect("manIsland");
-                    playerOne.PlayerVelocity = Vector3.Zero;
-                    restart = true;
-                }
-               /*
-                playerHealth -= 10;
 
-                if (playerHealth <= 0)
-                {
-                    playerHealth = 0;
+                    //stop the sound by calling the audi class method
                     audio.StopSoundEffect("manIsland");
-                    mdlVelocity = Vector3.Zero;
+
+                    //Make the player stationary
+                    playerOne.PlayerVelocity = Vector3.Zero;
+
+                    //set the restart boolean to true- we are restarting. 
                     restart = true;
                 }
-                mdlVelocity = Vector3.Negate(mdlVelocity);
-                mdlPosition += mdlVelocity / 2;
-                */
+               
             }
 
             
+            //This nested for loop is used to cycle through every active cannonball on screen.
+            // then  cycle through every castle, and every and tower and determine whether a collision has occured
             for (int i = 0; i<cannonballs.Length; i++)
             {
                 if (cannonballs[i].isActive)
                 {
+                    //create a bounding colume for EACH cannoball
                     BoundingSphere CannonSphere = new BoundingSphere(
                         cannonballs[i].position, mdl_CannonBall.Meshes[0].BoundingSphere.Radius * 0.95f);
                    
+                    //this modifier makes the island collision spehere half the size,meaninf the cannonball doesnt
+                    //dissapear until it hits the centre of the island.
                     float modifier = islandSphere.Radius * 0.5f;
                     islandSphere.Radius = modifier;
                     if(CannonSphere.Intersects(islandSphere))
                     {
-                        audio.PlaySoundEffect("cannonIsland");
+                        //play a sound
+                        audio.PlaySoundEffect("cannonIsland");  
+
+                        //deavtivate the cannoball( removing it from the screen)
                         cannonballs[i].isActive = false;
                         break;
                     }
@@ -582,8 +636,12 @@ namespace GP3_Coursework
                         {
                             if (towerArray[t].isActive)
                             {
+                                //repeat the process for the tower. This time, if the cannonball hits the tower, delete both 
+                                //the tower and the cannonball. 
                                 towerSphere = new BoundingSphere(
                                     towerArray[t].towerPosition, mdl_Tower.Meshes[0].BoundingSphere.Radius * 0.0100f);
+
+                                //The default bounding volume was far too big, reduce it further.
                                      float furtherReduct = towerSphere.Radius * 0.25f;
                                       towerSphere.Radius = furtherReduct;
                                         if (CannonSphere.Intersects(towerSphere))
@@ -594,7 +652,7 @@ namespace GP3_Coursework
                                             break;
                                         }
                             }
-                        }
+                        }                       //As before.
 
                                             for (int c = 0; c < castles.Length; c++)
                                             {
@@ -627,6 +685,10 @@ namespace GP3_Coursework
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+
+            //fore each cannonball in the list, if it is active, then we create
+            /// a movement matrix. We dont require a rotation in this instance as it is already inheriting the player 
+            /// models
             for (int i = 0; i < 3; i++)
             {
                 if (cannonballs[i].isActive)
@@ -636,6 +698,7 @@ namespace GP3_Coursework
                 }
             }
 
+            //as for the cannonballs
             for (int i = 0; i < 1; i++)
             {
                 if (towerArray[i].isActive)
@@ -645,6 +708,7 @@ namespace GP3_Coursework
                 }
             }
 
+            //as for the towers/cannonballs
             for (int c = 0; c < 1; c++)
             {
                 if (castles[c].isActive)
@@ -654,6 +718,7 @@ namespace GP3_Coursework
                 }
             }
 
+            //not used 
             for (int a = 0; a < arrows.Length; a++)
             {
                 if (arrows[a].isActive)
@@ -664,11 +729,12 @@ namespace GP3_Coursework
             }
 
 
-          //  Matrix modelTransform = makeTransform(mdlRotation, mdlPosition);
+            //create a movement/rotation matrix from the method, and pass this, and the players transform 
+            //array into the draw method, to keep the player moveing onscreen.
             Matrix playerTransform = makeTransform(playerOne.PlayerRotation, playerOne.PlayerPosition);
             DrawModel(playerOne.PlayerModel, playerTransform, playerOne.Transforms);   
-            
-          //  DrawModel(mdlPlayer, modelTransform, mdlPlayerTransform);
+           
+            //as before, these methods simply make a rotational and position matrix, and call the draw method
             Matrix terrainTrans = makeTransform(0f, domePos);
                 DrawModel(mdl_OuterDome, terrainTrans, mdlOuterDomeTrans);
             Matrix waterTrans = makeTransform(0f, waterPos);
@@ -676,7 +742,9 @@ namespace GP3_Coursework
             Matrix islandTrans = makeTransform(islandRoation, islandPos);
                 DrawModel(mdl_Island, islandTrans, mdlIslandTransform);
 
-                Draw2d();
+            //a call to perform 2d drawing ( the Heads up Display.) Called after 3D
+            // to esnusre it isnt drawn over
+            Draw2d();
                
 
             base.Draw(gameTime);
@@ -688,9 +756,12 @@ namespace GP3_Coursework
         {
             spriteBatch.Begin();
            
-           // spriteBatch.DrawString(aFont, "Men Aboard:" + playerHealth.ToString(), new Vector2(100, 20), Color.Black);
+          //Display the players energy (health onscreen);
             spriteBatch.DrawString(aFont, "Men Aboard:  " + playerOne.PlayerHealth.ToString(), new Vector2(100, 20), Color.White);
 
+
+            //When restart Variable is called, draw the prompt to the user, to let them know how to quit the game,
+            //or restart. 
             if (restart == true)
             {
                
@@ -704,6 +775,13 @@ namespace GP3_Coursework
 
         }
 
+
+        /// <summary>
+        /// A simple method which is used to create a models transformation matrix
+        /// </summary>
+        /// <param name="rotation">The models current rotation</param>
+        /// <param name="position">The models current position</param>
+        /// <returns>A transformation matrix representing the given models position and orientation</returns>
         Matrix makeTransform(float rotation, Vector3 position)
         {
             return Matrix.CreateRotationY(rotation)*Matrix.CreateTranslation(position);

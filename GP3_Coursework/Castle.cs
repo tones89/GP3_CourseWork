@@ -12,6 +12,6 @@ namespace GP3_Coursework
         public float rotation;
         public bool isActive;
       
-        public float distanceToPlayer;
+      
     }
 }
